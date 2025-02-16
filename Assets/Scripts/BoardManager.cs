@@ -1,0 +1,65 @@
+using System;
+using Unity.Collections;
+using UnityEngine;
+
+public class BoardManager : Singleton<BoardManager>
+{
+    [field:SerializeReference]
+    public GridManager Grid { get; private set; }
+
+    [SerializeField]
+    private GameObject gridSelectablePrefab;
+
+    public BoardSpace[,] Board { get; private set; }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    protected override void Awake()
+    {
+        base.Awake();
+        InitBoard();
+    }
+
+    private void InitBoard()
+    {
+        Board = new BoardSpace[Grid.GridBounds.x, Grid.GridBounds.y];
+
+        SetupSpaces();
+        
+        // Check if any board occupants are in the Scene
+        foreach(BoardOccupant occupant in FindObjectsByType<BoardOccupant>(FindObjectsSortMode.None)) {
+            Vector2Int cell = Grid.GetClosestCellViaWorld(occupant.transform.position);
+            if(!IsOccupied(cell.x, cell.y)) {
+                Board[cell.x, cell.y].Occupant = occupant;
+            }
+            else {
+                Debug.LogWarning(string.Format("Destroying {0} as there was no available cell", occupant.name));
+                Destroy(occupant.gameObject);
+            }
+        }
+    }
+
+    private void SetupSpaces()
+    {
+        ForEachCell((x, y) => {
+            Vector3 pos = Grid.GetCellCenterWorld(x, y);
+            GridSelectable selectable = Instantiate(gridSelectablePrefab, pos, Quaternion.identity).GetComponent<GridSelectable>();
+            Board[x, y] = new BoardSpace(new Vector2Int(x, y), selectable);
+        });
+    }
+
+    public void ForEachSpace(Action<BoardSpace> spaceAction) {
+        ForEachCell((x, y) => spaceAction?.Invoke(Board[x, y]));
+    }
+
+    public void ForEachCell(Action<int, int> cellAction) {
+        for(int i = 0; i < Grid.GridBounds.x; i++) {
+            for(int j = 0; j < Grid.GridBounds.y; j++) {
+                cellAction?.Invoke(i, j);
+            }   
+        }
+    }
+
+    private bool IsOccupied(int x, int y) {
+        return Board[x, y].Occupant != null;
+    }
+}
