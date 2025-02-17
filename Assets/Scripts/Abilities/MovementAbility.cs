@@ -6,8 +6,11 @@ public class MovementAbility : Ability
     [field:SerializeReference]
     public int Range { get; private set;}
 
-    protected override AbilityProcessor GetAbilityProcessor(CharacterManager characterManager)
+    public override AbilityProcessor GetAbilityProcessor(CharacterManager characterManager)
     {
-        return new SelectionAbilityProcessor(characterManager, new MovementSelectionProcessor(characterManager, Range));
+        ISelectionController selectionController = characterManager.GetSelectionController();
+        SelectionProcessor selectionProcessor = new MovementSelectionProcessor(characterManager, Range);
+
+        return new SelectionAbilityProcessor(characterManager, selectionController, selectionProcessor);
     }
 }

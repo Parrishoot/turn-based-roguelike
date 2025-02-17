@@ -5,6 +5,7 @@ using System.Collections;
 
 public class RandomSelectionController : ISelectionController
 {
+
     public void BeginSelection(SelectionProcessor selectionProcessor)
     {
         List<BoardSpace> applicableBoardSpaces = BoardManager.Instance.GetMatchingSpaces(selectionProcessor.GetCriteria().Filter);

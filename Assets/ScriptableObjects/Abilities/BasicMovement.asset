@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BasicMovement
   m_EditorClassIdentifier: 
   <AbilityName>k__BackingField: Basic Movement
-  <Range>k__BackingField: 4
+  <Range>k__BackingField: 2

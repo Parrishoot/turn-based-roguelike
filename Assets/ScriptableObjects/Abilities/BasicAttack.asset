@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AbilityName>k__BackingField: Basic Attack
   <Range>k__BackingField: 1
-  <Damage>k__BackingField: 5
+  <Damage>k__BackingField: 1
   <NumTargets>k__BackingField: 1

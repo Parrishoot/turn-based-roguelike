@@ -13,8 +13,11 @@ public class AttackAbility : Ability
     public int NumTargets { get; private set;}
 
 
-    protected override AbilityProcessor GetAbilityProcessor(CharacterManager characterManager)
+    public override AbilityProcessor GetAbilityProcessor(CharacterManager characterManager)
     {
-        return new SelectionAbilityProcessor(characterManager, new AttackSelectionProcessor(characterManager, NumTargets, Damage, Range));
+        ISelectionController selectionController = characterManager.GetSelectionController();
+        SelectionProcessor selectionProcessor = new AttackSelectionProcessor(characterManager, NumTargets, Damage, Range);
+
+        return new SelectionAbilityProcessor(characterManager, selectionController, selectionProcessor);
     }
 }

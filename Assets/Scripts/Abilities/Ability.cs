@@ -9,5 +9,5 @@ public abstract class Ability : ScriptableObject
         GetAbilityProcessor(characterManager).Process();
     }
 
-    protected abstract AbilityProcessor GetAbilityProcessor(CharacterManager characterManager);
+    public abstract AbilityProcessor GetAbilityProcessor(CharacterManager characterManager);
 }
