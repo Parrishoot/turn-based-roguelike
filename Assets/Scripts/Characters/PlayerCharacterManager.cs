@@ -4,7 +4,7 @@ public class PlayerCharacterManager : CharacterManager
 {
     public override CharacterType GetCharacterType() => CharacterType.PLAYER;
 
-    public override SelectionController GetSelectionController()
+    public override ISelectionController GetSelectionController()
     {
         return new PlayerSelectionController();
     }

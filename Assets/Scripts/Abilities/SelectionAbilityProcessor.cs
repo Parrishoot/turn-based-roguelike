@@ -12,7 +12,7 @@ public class SelectionAbilityProcessor : AbilityProcessor
 
     public override void Process()
     {
-        SelectionController selectionController = characterManager.GetSelectionController();
+        ISelectionController selectionController = characterManager.GetSelectionController();
         abilitySelectionProcessor.OnSelectionProcessed += () => OnAbilityFinish?.Invoke();
         selectionController.BeginSelection(abilitySelectionProcessor);
     }

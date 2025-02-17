@@ -5,5 +5,6 @@ public enum CharacterType
     PLAYER,
     ALLY,
     ENEMY,
-    NEUTRAL
+    NEUTRAL,
+    OBSTACLE
 }

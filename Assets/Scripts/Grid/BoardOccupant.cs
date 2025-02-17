@@ -1,7 +1,13 @@
 using UnityEngine;
 
-public class BoardOccupant: MonoBehaviour
+public abstract class BoardOccupant: MonoBehaviour
 {
     // TODO: Implement
-    public BoardSpace Space { get; set;}
+    public BoardSpace Space { get; set; }
+
+    public abstract CharacterType GetCharacterType();
+
+    public virtual void Damage(int damage) {
+
+    }
 }

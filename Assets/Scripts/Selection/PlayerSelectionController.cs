@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PlayerSelectionController : SelectionController
+public class PlayerSelectionController : ISelectionController
 {
-    public override void BeginSelection(SelectionProcessor selectionProcessor)
+    public void BeginSelection(SelectionProcessor selectionProcessor)
     {
         SelectionManager.Instance.OnNextSelectionComplete += selectionProcessor.ProcessSelection;
         SelectionManager.Instance.BeginSelection(selectionProcessor.GetCriteria());

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 
@@ -61,5 +62,20 @@ public class BoardManager : Singleton<BoardManager>
 
     private bool IsOccupied(int x, int y) {
         return Board[x, y].Occupant != null;
+    }
+
+    public List<BoardSpace> GetMatchingSpaces(Predicate<BoardSpace> filter) {
+
+        List<BoardSpace> matchingSpaces = new List<BoardSpace>();
+
+        for(int i = 0; i < Grid.GridBounds.x; i++) {
+            for(int j = 0; j < Grid.GridBounds.y; j++) {
+                if(filter.Invoke(Board[i, j])) {
+                    matchingSpaces.Add(Board[i,j]);
+                }
+            }   
+        }
+
+        return matchingSpaces;
     }
 }

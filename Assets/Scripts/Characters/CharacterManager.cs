@@ -6,7 +6,13 @@ public abstract class CharacterManager : BoardOccupant
     [field:SerializeReference]
     public MovementController MovementController { get; private set; }
 
-    public abstract SelectionController GetSelectionController();
+    [field:SerializeReference]
+    public HealthController HealthController { get; private set; }
 
-    public abstract CharacterType GetCharacterType(); 
+    public abstract ISelectionController GetSelectionController();
+
+    public override void Damage(int damage)
+    {
+        HealthController?.TakeDamage(damage);
+    }
 }

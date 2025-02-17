@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class SelectionController
+public interface ISelectionController
 {
-    public abstract void BeginSelection(SelectionProcessor selectionProcessor);
+    void BeginSelection(SelectionProcessor selectionProcessor);
 }
