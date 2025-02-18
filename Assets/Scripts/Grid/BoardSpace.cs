@@ -54,7 +54,7 @@ public class BoardSpace
         int xDist = Math.Abs(Cell.x - boardSpace.Cell.x);
         int yDist = Math.Abs(Cell.y - boardSpace.Cell.y);
 
-        return oneDirection ? Mathf.Min(xDist, yDist) : xDist + yDist;
+        return oneDirection ? Mathf.Max(xDist, yDist) : xDist + yDist;
 
     }
 }

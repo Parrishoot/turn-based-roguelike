@@ -35,6 +35,11 @@ public class MovementSelectionProcessor : SelectionProcessor
 
     public override void ProcessSelection(List<BoardSpace> selectedSpaces)
     {
+        if(selectedSpaces.Count <= 0) {
+            OnSelectionProcessed?.Invoke();
+            return;
+        }
+
         BoardSpace targetSpace = selectedSpaces.First();
         Path path = PathFinder.FindPath(BoardManager.Instance.Board, characterManager.Space, targetSpace, range);
 

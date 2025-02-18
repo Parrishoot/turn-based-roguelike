@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class SelectionManager : Singleton<SelectionManager>
 {
+    public Action OnSelectionStarted;
+
+    public Action OnSelectionCompleted;
+
     public Action<List<BoardSpace>> OnNextSelectionComplete;
 
     private Stack<GridSelectable> currentSelections = new Stack<GridSelectable>();
@@ -31,6 +35,7 @@ public class SelectionManager : Singleton<SelectionManager>
             space.Selectable.SetSelectable(SelectionInProgress.Filter.Invoke(space));
         });
 
+        OnSelectionStarted?.Invoke();
     }
 
     public void CheckSelection(GridSelectable gridSelectable)
@@ -65,8 +70,28 @@ public class SelectionManager : Singleton<SelectionManager>
             return;
         }
 
+        List<BoardSpace> selections = currentSelections.Select(x => x.Space).ToList();
+        
+        ResetSelections();
+
         OnNextSelectionComplete?.Invoke(currentSelections.Select(x => x.Space).ToList());
-        CancelCurrentSelection();
+        OnNextSelectionComplete = null;
+
+        OnSelectionCompleted?.Invoke();
+    }
+
+    private void ResetSelections()
+    {
+        if(SelectionInProgress == null) {
+            return;
+        }
+
+        BoardManager.Instance.ForEachSpace((space) => {
+            space.Selectable.Deselect();
+            space.Selectable.SetSelectable(false);
+        });
+
+        SelectionInProgress = null;
     }
 
     public void Update() {
@@ -81,18 +106,19 @@ public class SelectionManager : Singleton<SelectionManager>
     }
 
     public void CancelCurrentSelection() {
-        
-        if(SelectionInProgress == null) {
-            return;
-        }
-
-        BoardManager.Instance.ForEachSpace((space) => {
-            space.Selectable.Deselect();
-            space.Selectable.SetSelectable(false);
-        });
-
-        SelectionInProgress = null;
+        ResetSelections();
         OnNextSelectionComplete = null;
+       
+        OnSelectionCompleted?.Invoke();
+    }
+
+    public void SkipCurrentSelection() {
+        ResetSelections();
+        
+        OnNextSelectionComplete?.Invoke(new List<BoardSpace>());
+        OnNextSelectionComplete = null;
+        
+        OnSelectionCompleted?.Invoke();
     }
 
     [ProButton]
