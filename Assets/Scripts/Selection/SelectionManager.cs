@@ -30,10 +30,28 @@ public class SelectionManager : Singleton<SelectionManager>
 
         SelectionInProgress = selectionCriteria;
         currentSelections = new Stack<GridSelectable>();
-    
+
+        List<BoardSpace> selectableSpaces = new List<BoardSpace>();
+
         BoardManager.Instance.ForEachSpace((space) => {
-            space.Selectable.SetSelectable(SelectionInProgress.Filter.Invoke(space));
+            
+            bool isSelectable = SelectionInProgress.Filter.Invoke(space);
+            space.Selectable.SetSelectable(isSelectable);
+
+            if(isSelectable) {
+                selectableSpaces.Add(space);
+            }
+
         });
+
+
+        // "Guess" the selection if the number of selectable spaces
+        // is less than the number of spaces we can select
+        if(selectableSpaces.Count <= SelectionInProgress.MaxSelections) {
+            foreach(BoardSpace space in selectableSpaces) {
+                CheckSelection(space.Selectable);
+            }
+        }
 
         OnSelectionStarted?.Invoke();
     }
@@ -73,11 +91,11 @@ public class SelectionManager : Singleton<SelectionManager>
         List<BoardSpace> selections = currentSelections.Select(x => x.Space).ToList();
         
         ResetSelections();
+        
+        OnSelectionCompleted?.Invoke();
 
         OnNextSelectionComplete?.Invoke(currentSelections.Select(x => x.Space).ToList());
         OnNextSelectionComplete = null;
-
-        OnSelectionCompleted?.Invoke();
     }
 
     private void ResetSelections()
@@ -107,18 +125,17 @@ public class SelectionManager : Singleton<SelectionManager>
 
     public void CancelCurrentSelection() {
         ResetSelections();
-        OnNextSelectionComplete = null;
-       
         OnSelectionCompleted?.Invoke();
+        OnNextSelectionComplete = null;
     }
 
     public void SkipCurrentSelection() {
         ResetSelections();
-        
+
+        OnSelectionCompleted?.Invoke();
+
         OnNextSelectionComplete?.Invoke(new List<BoardSpace>());
         OnNextSelectionComplete = null;
-        
-        OnSelectionCompleted?.Invoke();
     }
 
     [ProButton]
