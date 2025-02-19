@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class Ability : ScriptableObject
@@ -10,4 +11,6 @@ public abstract class Ability : ScriptableObject
     }
 
     public abstract AbilityProcessor GetAbilityProcessor(CharacterManager characterManager);
+
+    public abstract String GetAbilityDescription();
 }

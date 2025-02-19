@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AttackAbility", menuName = "Abilities/AttackAbility", order = 1)]
@@ -12,6 +13,10 @@ public class AttackAbility : Ability
     [field:SerializeReference]
     public int NumTargets { get; private set;}
 
+    public override string GetAbilityDescription()
+    {
+        return string.Format("Attack {0} target(s) up to {1} space(s) away for {2} damage", NumTargets, Range, Damage);
+    }
 
     public override AbilityProcessor GetAbilityProcessor(CharacterManager characterManager)
     {
