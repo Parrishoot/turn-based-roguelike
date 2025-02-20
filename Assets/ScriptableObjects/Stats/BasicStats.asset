@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cca446d908ea73419732c51e47b5fae, type: 3}
-  m_Name: BasicMovement
+  m_Script: {fileID: 11500000, guid: 36091e19deaf49242aefd9e46c6b118a, type: 3}
+  m_Name: BasicStats
   m_EditorClassIdentifier: 
-  <AbilityName>k__BackingField: Basic Movement
-  <Range>k__BackingField: 0
+  Health: 5
+  Shield: 0
+  Movement: 2
+  Damage: 2
+  Range: 1

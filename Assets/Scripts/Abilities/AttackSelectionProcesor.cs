@@ -22,10 +22,12 @@ public class AttackSelectionProcessor : SelectionProcessor
 
     public override SelectionCriteria GetCriteria()
     {
+        int totalRange = characterManager.StatsManager.ModifiedValue(CharacterStatType.RANGE, range);
+
         return new SelectionCriteria()
             .WithMaxSelections(numTargets)
             .WithFilter(space => {
-                return space.DistanceTo(characterManager.Space, true) <= range &&
+                return space.DistanceTo(characterManager.Space, true) <= totalRange &&
                     space.IsOccupied &&
                     characterManager.GetCharacterType()
                                     .GetOpposingCharacterTypes()
@@ -42,7 +44,7 @@ public class AttackSelectionProcessor : SelectionProcessor
                 continue;
             }
 
-            space.Occupant.Damage(damage);
+            space.Occupant.Damage(characterManager.StatsManager.ModifiedValue(CharacterStatType.DAMAGE, damage));
 
         }
 

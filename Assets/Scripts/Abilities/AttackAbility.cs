@@ -15,7 +15,7 @@ public class AttackAbility : Ability
 
     public override string GetAbilityDescription()
     {
-        return string.Format("Attack {0} target(s) up to {1} space(s) away for {2} damage", NumTargets, Range, Damage);
+        return string.Format("Attack {0} target(s) up to +{1} range for +{2} damage", NumTargets, Range, Damage);
     }
 
     public override AbilityProcessor GetAbilityProcessor(CharacterManager characterManager)

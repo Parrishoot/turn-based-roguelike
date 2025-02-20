@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cca446d908ea73419732c51e47b5fae, type: 3}
-  m_Name: BasicMovement
+  m_Script: {fileID: 11500000, guid: 8d0e9fbe0a9cede4d945844672783eb3, type: 3}
+  m_Name: SpeedUp
   m_EditorClassIdentifier: 
-  <AbilityName>k__BackingField: Basic Movement
-  <Range>k__BackingField: 0
+  <AbilityName>k__BackingField: Speed Up!
+  statType: 2
+  statAdjusterType: 0
+  adjustmentValue: 0

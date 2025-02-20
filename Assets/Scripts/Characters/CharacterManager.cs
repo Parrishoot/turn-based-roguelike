@@ -9,6 +9,9 @@ public abstract class CharacterManager : BoardOccupant
     [field:SerializeReference]
     public HealthController HealthController { get; private set; }
 
+    [field:SerializeReference]
+    public CharacterStatsManager StatsManager { get; private set; }
+
     public abstract ISelectionController GetSelectionController();
 
     public override void Damage(int damage)

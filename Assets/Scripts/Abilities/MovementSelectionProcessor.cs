@@ -19,17 +19,17 @@ public class MovementSelectionProcessor : SelectionProcessor
             .WithFilter(IsWalkable);
 
     }
-
     protected bool IsWalkable(BoardSpace boardSpace) {
         
         // Check for basic distance and occupation of space
+        int totalRange = characterManager.StatsManager.ModifiedValue(CharacterStatType.MOVEMENT, range);
         int distance = characterManager.Space.DistanceTo(boardSpace);
-        if(boardSpace.IsOccupied || distance > range) {
+        if(boardSpace.IsOccupied || distance > totalRange) {
             return false;
         }
 
         // Check for available path
-        Path path = PathFinder.FindPath(BoardManager.Instance.Board, characterManager.Space, boardSpace, range);
+        Path path = PathFinder.FindPath(BoardManager.Instance.Board, characterManager.Space, boardSpace, totalRange);
         return path.IsValid;
     }
 
@@ -41,7 +41,9 @@ public class MovementSelectionProcessor : SelectionProcessor
         }
 
         BoardSpace targetSpace = selectedSpaces.First();
-        Path path = PathFinder.FindPath(BoardManager.Instance.Board, characterManager.Space, targetSpace, range);
+
+        int totalRange = characterManager.StatsManager.ModifiedValue(CharacterStatType.MOVEMENT, range);
+        Path path = PathFinder.FindPath(BoardManager.Instance.Board, characterManager.Space, targetSpace, totalRange);
 
         characterManager.MovementController.OnNextMovementFinished += () => OnSelectionProcessed?.Invoke();
         characterManager.MovementController.MoveAlongPath(path);

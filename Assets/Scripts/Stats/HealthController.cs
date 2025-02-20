@@ -4,14 +4,15 @@ using UnityEngine;
 public class HealthController : MonoBehaviour
 {
     [SerializeField]
-    private int startingHealth = 10;
+    private CharacterManager characterManager;
 
-    [SerializeField]
-    private int startingShield = 0;
+    public int CurrentHealth { 
+        get {
+            return Math.Max(0, characterManager.StatsManager.Stats[CharacterStatType.HEALTH].CurrentValue - currentDamage);
+        }
+    }
 
-    public int CurrentHealth { get; private set; }
-
-    public int CurrentShield { get; private set; }
+    private int currentDamage;
 
     public Action<int> OnDamageTaken { get; set; }
 
@@ -21,13 +22,6 @@ public class HealthController : MonoBehaviour
 
     public Action OnDeath { get; set; }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        CurrentHealth = startingHealth;
-        CurrentShield = startingShield;
-    }
-
     public void TakeDamage(int damage) {
 
         int remainingDamage = ProcessShield(damage);
@@ -35,7 +29,7 @@ public class HealthController : MonoBehaviour
             return;
         }
 
-        CurrentHealth -= remainingDamage;
+        currentDamage -= remainingDamage;
         OnDamageTaken?.Invoke(remainingDamage);
 
         if(CurrentHealth <= 0) {
@@ -45,13 +39,13 @@ public class HealthController : MonoBehaviour
     }
 
     public void Heal(int health) {
-        CurrentHealth = Math.Min(CurrentHealth + health, startingHealth);
+        currentDamage = Math.Max(0, currentDamage - health);
         OnHeal?.Invoke(health);
     }
 
     private int ProcessShield(int damage)
     {
-        int shieldedDamage = Mathf.Min(damage, CurrentShield);
+        int shieldedDamage = Mathf.Min(damage, characterManager.StatsManager.Stats[CharacterStatType.SHIELD].CurrentValue);
 
         if(shieldedDamage > 0) {
             damage -= shieldedDamage;
