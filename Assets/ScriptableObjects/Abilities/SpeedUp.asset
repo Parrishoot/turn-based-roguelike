@@ -15,4 +15,4 @@ MonoBehaviour:
   <AbilityName>k__BackingField: Speed Up!
   statType: 2
   statAdjusterType: 0
-  adjustmentValue: 0
+  adjustmentValue: 1

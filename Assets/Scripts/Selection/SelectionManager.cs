@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class SelectionManager : Singleton<SelectionManager>
 {
-    public Action OnSelectionStarted;
+    public EventProcessor OnSelectionStarted = new EventProcessor();
 
-    public Action OnSelectionCompleted;
+    public EventProcessor OnSelectionCanceled = new EventProcessor();
 
-    public Action<List<BoardSpace>> OnNextSelectionComplete;
+    public EventWithResultProcessor<List<BoardSpace>> OnSelectionCompleted = new EventWithResultProcessor<List<BoardSpace>>();
 
     private Stack<GridSelectable> currentSelections = new Stack<GridSelectable>();
 
@@ -53,7 +53,7 @@ public class SelectionManager : Singleton<SelectionManager>
             }
         }
 
-        OnSelectionStarted?.Invoke();
+        OnSelectionStarted.Process();
     }
 
     public void CheckSelection(GridSelectable gridSelectable)
@@ -91,11 +91,8 @@ public class SelectionManager : Singleton<SelectionManager>
         List<BoardSpace> selections = currentSelections.Select(x => x.Space).ToList();
         
         ResetSelections();
-        
-        OnSelectionCompleted?.Invoke();
 
-        OnNextSelectionComplete?.Invoke(currentSelections.Select(x => x.Space).ToList());
-        OnNextSelectionComplete = null;
+        OnSelectionCompleted.Process(currentSelections.Select(x => x.Space).ToList());
     }
 
     private void ResetSelections()
@@ -125,17 +122,13 @@ public class SelectionManager : Singleton<SelectionManager>
 
     public void CancelCurrentSelection() {
         ResetSelections();
-        OnSelectionCompleted?.Invoke();
-        OnNextSelectionComplete = null;
+        OnSelectionCanceled.Process();
     }
 
     public void SkipCurrentSelection() {
         ResetSelections();
+        OnSelectionCompleted.Process(new List<BoardSpace>());
 
-        OnSelectionCompleted?.Invoke();
-
-        OnNextSelectionComplete?.Invoke(new List<BoardSpace>());
-        OnNextSelectionComplete = null;
     }
 
     [ProButton]
