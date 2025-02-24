@@ -1,10 +1,10 @@
 using System;
 
-public class EventUntilHandlerWithResult<T> : EventHandlerWithResult<T>
+public class EventUntilHandler<T> : EventHandler<T>
 {
     private Func<bool> predicate;
 
-    public EventUntilHandlerWithResult(Action<T> action, Func<bool> predicate) : base(action)
+    public EventUntilHandler(Action<T> action, Func<bool> predicate) : base(action)
     {
         this.predicate = predicate;
     }

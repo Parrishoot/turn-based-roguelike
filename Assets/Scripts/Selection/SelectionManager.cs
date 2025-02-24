@@ -10,7 +10,7 @@ public class SelectionManager : Singleton<SelectionManager>
 
     public EventProcessor OnSelectionCanceled = new EventProcessor();
 
-    public EventWithResultProcessor<List<BoardSpace>> OnSelectionCompleted = new EventWithResultProcessor<List<BoardSpace>>();
+    public EventProcessor<List<BoardSpace>> OnSelectionCompleted = new EventProcessor<List<BoardSpace>>();
 
     private Stack<GridSelectable> currentSelections = new Stack<GridSelectable>();
 

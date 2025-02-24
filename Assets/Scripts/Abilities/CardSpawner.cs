@@ -12,8 +12,7 @@ public class CardSpawner : MonoBehaviour
     [SerializeField]
     private Transform handParentTransform;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         deckManager.OnCardDealt += SpawnCard;
     }

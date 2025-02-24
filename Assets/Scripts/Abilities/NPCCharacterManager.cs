@@ -1,3 +1,4 @@
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class NPCCharacterManager : CharacterManager
@@ -7,6 +8,9 @@ public class NPCCharacterManager : CharacterManager
 
     [SerializeField]
     private ISelectionController selectionControllerOverride;
+
+    [field:SerializeReference]
+    public NPCAbilityManager AbilityManager { get; private set; }
 
     public override CharacterType GetCharacterType()
     {

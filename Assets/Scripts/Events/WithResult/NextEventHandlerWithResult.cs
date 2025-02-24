@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-public class NextEventHandlerWithResult<T> : EventHandlerWithResult<T>
+public class NextEventHandler<T> : EventHandler<T>
 {
-    public NextEventHandlerWithResult(Action<T> action) : base(action)
+    public NextEventHandler(Action<T> action) : base(action)
     {
     }
 

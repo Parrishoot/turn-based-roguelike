@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
-public abstract class EventHandlerWithResult<T> : IEventHandlerWithResult<T>
+public abstract class EventHandler<T> : IEventHandler<T>
 {
     protected Action<T> OnEvent;
 
-    public EventHandlerWithResult(Action<T> action) {
+    public EventHandler(Action<T> action) {
         OnEvent = action;
     }
 

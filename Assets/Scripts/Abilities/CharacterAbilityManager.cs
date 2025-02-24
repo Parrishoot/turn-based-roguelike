@@ -1,17 +1,20 @@
 using System.Collections.Generic;
-using com.cyborgAssets.inspectorButtonPro;
 using UnityEngine;
 
-public class CharacterAbilityManager : MonoBehaviour
+public class NPCAbilityManager : MonoBehaviour
 {
+    public EventProcessor OnAbilityFinish = new EventProcessor();
+
     [SerializeField]
     private CharacterManager characterManager;
 
     [SerializeField]
     private List<Ability> abilities;
     
-    [ProButton]
-    private void UseAbility() {
-        abilities[0].ProcessAbility(characterManager);
+    public void UseAbility() {
+        AbilityProcessor ability = abilities[0].GetAbilityProcessor(characterManager);
+        ability.OnAbilityFinish += OnAbilityFinish.Process;
+
+        ability.Process();
     }
 }

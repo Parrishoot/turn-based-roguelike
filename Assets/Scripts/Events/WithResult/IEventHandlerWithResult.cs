@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IEventHandlerWithResult<T>
+public interface IEventHandler<T>
 {
     void Handle(T result);
 

@@ -1,7 +1,7 @@
 using System;
-public class EveryEventHandlerWithResult<T> : EventHandlerWithResult<T>
+public class EveryEventHandler<T> : EventHandler<T>
 {
-    public EveryEventHandlerWithResult(Action<T> action) : base(action)
+    public EveryEventHandler(Action<T> action) : base(action)
     {
     }
 
