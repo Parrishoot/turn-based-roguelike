@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CompoundAbility", menuName = "Abilities/CompoundAbility", order = 1)]
-public class CompoundAbility : Ability
+[CreateAssetMenu(fileName = "CompoundAbility", menuName = "Abilities/Active/CompoundAbility", order = 1)]
+public class CompoundAbility : ActiveAbility
 {
     [field:SerializeReference]
-    public List<Ability> Abilites { get; private set; }
+    public List<ActiveAbility> Abilites { get; private set; }
 
     public override string GetAbilityDescription()
     {

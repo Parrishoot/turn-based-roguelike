@@ -6,7 +6,7 @@ public class CompoundAbilityProcessor : AbilityProcessor
 {
     private Queue<AbilityProcessor> abilityQueue;
 
-    public CompoundAbilityProcessor(CharacterManager characterManager, List<Ability> abilities): base(characterManager) {
+    public CompoundAbilityProcessor(CharacterManager characterManager, List<ActiveAbility> abilities): base(characterManager) {
         this.abilityQueue = new Queue<AbilityProcessor>(abilities.Select(x => x.GetAbilityProcessor(characterManager)));
     }
 

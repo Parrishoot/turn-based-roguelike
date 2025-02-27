@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "StatAdjustAbility", menuName = "Abilities/StatAbility", order = 1)]
-public class StatAdjustAbility : Ability
+[CreateAssetMenu(fileName = "StatAdjustAbility", menuName = "Abilities/Active/StatAbility", order = 1)]
+public class StatAdjustAbility : ActiveAbility
 {
     [SerializeField]
     private CharacterStatType statType;

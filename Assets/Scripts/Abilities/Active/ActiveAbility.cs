@@ -1,16 +1,13 @@
 using System;
 using UnityEngine;
 
-public abstract class Ability : ScriptableObject
+public abstract class ActiveAbility : ScriptableObject
 {
-    [field:SerializeReference]
-    public string AbilityName { get ; private set;}
-
     public void ProcessAbility(CharacterManager characterManager) {
         GetAbilityProcessor(characterManager).Process();
     }
 
     public abstract AbilityProcessor GetAbilityProcessor(CharacterManager characterManager);
 
-    public abstract String GetAbilityDescription();
+    public abstract string GetAbilityDescription();
 }

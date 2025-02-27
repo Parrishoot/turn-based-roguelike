@@ -17,9 +17,9 @@ public class CardSpawner : MonoBehaviour
         deckManager.OnCardDealt += SpawnCard;
     }
 
-    private void SpawnCard(Ability ability)
+    private void SpawnCard(Card card)
     {
-        AbilityCardController cardController = Instantiate(cardPrefab, handParentTransform).GetComponent<AbilityCardController>();
-        cardController.Setup(ability);
+        CardUIController cardController = Instantiate(cardPrefab, handParentTransform).GetComponent<CardUIController>();
+        cardController.Setup(card);
     }
 }

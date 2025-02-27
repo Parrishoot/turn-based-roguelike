@@ -7,20 +7,20 @@ using UnityEngine;
 public class DeckManager : Singleton<DeckManager>
 {
     [SerializeField]
-    private List<Ability> abilities;
+    private List<Card> cards;
     
     [SerializeField]
     private int handLimit = 5;
 
-    public Action<Ability> OnCardDealt { get; set; }
+    public Action<Card> OnCardDealt { get; set; }
 
     public Action OnDeckReshuffle { get; set; }
 
-    public Queue<Ability> CurrentDeck { get; private set; } 
+    public Queue<Card> CurrentDeck { get; private set; } 
 
-    public List<Ability> Graveyard { get; private set; }
+    public List<Card> Graveyard { get; private set; }
 
-    public List<Ability> CurrentHand { get; private set; }
+    public List<Card> CurrentHand { get; private set; }
 
     void Start()
     {
@@ -29,9 +29,9 @@ public class DeckManager : Singleton<DeckManager>
 
     private void InitDeck()
     {
-        Graveyard = new List<Ability>();
-        CurrentDeck = new Queue<Ability>(abilities.Shuffled());
-        CurrentHand = new List<Ability>();
+        Graveyard = new List<Card>();
+        CurrentDeck = new Queue<Card>(cards.Shuffled());
+        CurrentHand = new List<Card>();
 
         for(int i = 0; i < handLimit; i++) {
             DrawCard();
@@ -45,7 +45,7 @@ public class DeckManager : Singleton<DeckManager>
             return;
         }
 
-        Ability dealtAbility = CurrentDeck.Dequeue();
+        Card dealtAbility = CurrentDeck.Dequeue();
 
         CurrentHand.Add(dealtAbility);
         OnCardDealt?.Invoke(dealtAbility);
@@ -54,18 +54,18 @@ public class DeckManager : Singleton<DeckManager>
     [ProButton]
     public void ReshuffleDeck() {
 
-        List<Ability> newDeckAbilities = CurrentDeck.ToList();
+        List<Card> newDeckAbilities = CurrentDeck.ToList();
         newDeckAbilities.AddRange(Graveyard);
 
-        Graveyard = new List<Ability>();
-        CurrentDeck = new Queue<Ability>(newDeckAbilities.Shuffled());
+        Graveyard = new List<Card>();
+        CurrentDeck = new Queue<Card>(newDeckAbilities.Shuffled());
         
         OnDeckReshuffle?.Invoke();
     }
 
-    internal void DiscardAbility(Ability ability)
+    internal void DiscardAbility(Card card)
     {
-        Graveyard.Add(ability);
-        CurrentHand.RemoveAll(x => x.GetInstanceID() == ability.GetInstanceID());
+        Graveyard.Add(card);
+        CurrentHand.RemoveAll(x => x.GetInstanceID() == card.GetInstanceID());
     }
 }

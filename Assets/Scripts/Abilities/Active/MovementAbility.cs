@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MovementAbility", menuName = "Abilities/MovementAbility", order = 1)]
-public class MovementAbility : Ability
+[CreateAssetMenu(fileName = "MovementAbility", menuName = "Abilities/Active/MovementAbility", order = 1)]
+public class MovementAbility : ActiveAbility
 {
 [field:SerializeReference]
     public int Range { get; private set;}

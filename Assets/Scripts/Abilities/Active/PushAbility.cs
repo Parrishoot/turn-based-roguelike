@@ -1,27 +1,23 @@
-using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AttackAbility", menuName = "Abilities/AttackAbility", order = 1)]
-public class AttackAbility : Ability
+[CreateAssetMenu(fileName = "PushAbility", menuName = "Abilities/Active/PushAbility", order = 1)]
+public class PushAbility : ActiveAbility
 {
     [field:SerializeReference]
     public int Range { get; private set;}
-
-    [field:SerializeReference]
-    public int Damage { get; private set;}
 
     [field:SerializeReference]
     public int NumTargets { get; private set;}
 
     public override string GetAbilityDescription()
     {
-        return string.Format("Attack {0} target(s) up to +{1} range for +{2} damage", NumTargets, Range, Damage);
+        return string.Format("Push {0} target(s) up to {1} range", NumTargets, Range);
     }
 
     public override AbilityProcessor GetAbilityProcessor(CharacterManager characterManager)
     {
         ISelectionController selectionController = characterManager.GetSelectionController();
-        SelectionProcessor selectionProcessor = new AttackSelectionProcessor(characterManager, NumTargets, Damage, Range);
+        SelectionProcessor selectionProcessor = new PushSelectionProcessor(characterManager, NumTargets, Range);
 
         return new SelectionAbilityProcessor(characterManager, selectionController, selectionProcessor);
     }

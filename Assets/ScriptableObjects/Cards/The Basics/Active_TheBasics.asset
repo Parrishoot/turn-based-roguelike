@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b6c77315f9ec51439d4ad36728f01b1, type: 3}
-  m_Name: TheBasics
+  m_Name: Active_TheBasics
   m_EditorClassIdentifier: 
   <AbilityName>k__BackingField: The Basics
   <Abilites>k__BackingField:

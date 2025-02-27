@@ -9,7 +9,7 @@ public class NPCAbilityManager : MonoBehaviour
     private CharacterManager characterManager;
 
     [SerializeField]
-    private List<Ability> abilities;
+    private List<ActiveAbility> abilities;
     
     public void UseAbility() {
         AbilityProcessor ability = abilities[0].GetAbilityProcessor(characterManager);
