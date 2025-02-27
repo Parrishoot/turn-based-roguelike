@@ -28,6 +28,10 @@ namespace Pathfinding {
         public static Path Invalid() {
             return new Path(null);
         }
+
+        public static Path Make(List<BoardSpace> spaces) {
+            return new Path(spaces.Select(x => new PathNode(x)).ToList());
+        }
     }
 }
 

@@ -274,20 +274,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilities:
   - {fileID: 11400000, guid: 5c22f6c3504b99d45b3d14af5b71308b, type: 2}
-  - {fileID: 11400000, guid: 5c22f6c3504b99d45b3d14af5b71308b, type: 2}
-  - {fileID: 11400000, guid: 5c22f6c3504b99d45b3d14af5b71308b, type: 2}
-  - {fileID: 11400000, guid: 1043e2ed574ef1242860d6f0c3b40529, type: 2}
-  - {fileID: 11400000, guid: 1043e2ed574ef1242860d6f0c3b40529, type: 2}
   - {fileID: 11400000, guid: 1043e2ed574ef1242860d6f0c3b40529, type: 2}
   - {fileID: 11400000, guid: 17dc97c1b967aec459a895f8746e5a94, type: 2}
-  - {fileID: 11400000, guid: 17dc97c1b967aec459a895f8746e5a94, type: 2}
-  - {fileID: 11400000, guid: 17dc97c1b967aec459a895f8746e5a94, type: 2}
-  - {fileID: 11400000, guid: 17dc97c1b967aec459a895f8746e5a94, type: 2}
-  - {fileID: 11400000, guid: 17dc97c1b967aec459a895f8746e5a94, type: 2}
   - {fileID: 11400000, guid: e356e3f7187f2814da656df200522350, type: 2}
-  - {fileID: 11400000, guid: e356e3f7187f2814da656df200522350, type: 2}
-  - {fileID: 11400000, guid: e356e3f7187f2814da656df200522350, type: 2}
-  - {fileID: 11400000, guid: e356e3f7187f2814da656df200522350, type: 2}
+  - {fileID: 11400000, guid: edbefd63ad6dcd74ca25c7346c7b6722, type: 2}
   handLimit: 5
 --- !u!1 &185447332
 GameObject:
@@ -1307,6 +1297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1eab5efdf815c94f9578a29be5fa33d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MovementController>k__BackingField: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1591,6 +1582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1eab5efdf815c94f9578a29be5fa33d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MovementController>k__BackingField: {fileID: 0}
 --- !u!1 &498922919
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,6 +2154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1eab5efdf815c94f9578a29be5fa33d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MovementController>k__BackingField: {fileID: 0}
 --- !u!1 &757586949
 GameObject:
   m_ObjectHideFlags: 0
@@ -4983,6 +4976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1eab5efdf815c94f9578a29be5fa33d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MovementController>k__BackingField: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

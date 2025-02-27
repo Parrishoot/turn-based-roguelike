@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {    
-    public Action OnNextMovementFinished { get; set; }
+    public EventProcessor OnMovementFinished { get; private set; } = new EventProcessor(); 
 
     [SerializeField]
     private float movementSpeed = .5f;
@@ -71,7 +71,6 @@ public class MovementController : MonoBehaviour
         targetSpace = null;
         currentPath = null;
 
-        OnNextMovementFinished?.Invoke();
-        OnNextMovementFinished = null;
+        OnMovementFinished.Process();
     }
 }

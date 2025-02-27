@@ -45,7 +45,7 @@ public class MovementSelectionProcessor : SelectionProcessor
         int totalRange = characterManager.StatsManager.ModifiedValue(CharacterStatType.MOVEMENT, range);
         Path path = PathFinder.FindPath(BoardManager.Instance.Board, characterManager.Space, targetSpace, totalRange);
 
-        characterManager.MovementController.OnNextMovementFinished += () => OnSelectionProcessed?.Invoke();
+        characterManager.MovementController.OnMovementFinished.OnNext(() => OnSelectionProcessed?.Invoke());
         characterManager.MovementController.MoveAlongPath(path);
     }
 }

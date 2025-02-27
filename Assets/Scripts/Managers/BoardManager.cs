@@ -60,8 +60,19 @@ public class BoardManager : Singleton<BoardManager>
         }
     }
 
-    private bool IsOccupied(int x, int y) {
-        return Board[x, y].Occupant != null;
+    public bool IsOccupied(int x, int y) {
+        return IsValid(x, y) && Board[x, y].Occupant != null;
+    }
+
+    public bool IsOpen(int x, int y) {
+        return IsValid(x, y) && Board[x, y].Occupant == null;
+    }
+
+    public bool IsValid(int x, int y) {
+        return x >= 0 && 
+            x < Grid.GridBounds.x && 
+            y >= 0 &&
+            y < Grid.GridBounds.y;
     }
 
     public List<BoardSpace> GetMatchingSpaces(Predicate<BoardSpace> filter) {
