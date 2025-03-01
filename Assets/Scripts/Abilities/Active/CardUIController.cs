@@ -2,9 +2,14 @@ using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class CardUIController : MonoBehaviour
+public class CardUIController : MonoBehaviour, IPointerClickHandler
 {
+
+    private const float IDLE_ROTATE_AMOUNT = 2f; 
+    private const float IDLE_BOB_AMOUNT = 2f;
+    private const float IDLE_ANIMATION_TIME = 2f;
 
     private const float ROTATE_TIME = .5f; 
 
@@ -15,7 +20,7 @@ public class CardUIController : MonoBehaviour
     private TMP_Text descriptionText;
 
     [SerializeField]
-    private Transform cardPanelTransform;
+    private RectTransform cardPanelTransform;
 
     private Card card;
 
@@ -30,6 +35,8 @@ public class CardUIController : MonoBehaviour
         this.card = card;
         titleText.text = card.CardName;
         descriptionText.text = card.Active.GetAbilityDescription();
+
+        BeginAnimation();
     }
 
     public void Flip() {
@@ -104,5 +111,33 @@ public class CardUIController : MonoBehaviour
 
     private bool PassiveActive() {
         return passive != null && passive.Active;
+    }
+
+    private void BeginAnimation() {
+
+        transform.eulerAngles = Vector3.forward * IDLE_ROTATE_AMOUNT;
+
+
+        // Rotate idle animation
+        DOTween.Sequence()
+        .Append(transform.DORotate(Vector3.forward * -IDLE_ROTATE_AMOUNT, IDLE_ANIMATION_TIME).SetEase(Ease.InOutSine))
+        .SetLoops(-1, LoopType.Yoyo)
+        .Play();
+
+        // Bob idle animation
+        DOTween.Sequence()
+        .Append(cardPanelTransform.DOAnchorPosY(cardPanelTransform.anchoredPosition.y + IDLE_BOB_AMOUNT, IDLE_ANIMATION_TIME * .8f).SetEase(Ease.InOutSine))
+        .SetLoops(-1, LoopType.Yoyo)
+        .Play();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if(eventData.button == PointerEventData.InputButton.Left) {
+            Use();
+        }
+        else if(eventData.button == PointerEventData.InputButton.Right) {
+            Flip();
+        }
     }
 }
