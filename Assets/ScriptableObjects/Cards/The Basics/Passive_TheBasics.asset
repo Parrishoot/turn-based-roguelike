@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Passive_TheBasics
   m_EditorClassIdentifier: 
   <Cost>k__BackingField: 0
-  <StatType>k__BackingField: 0
+  <StatType>k__BackingField: 2
   <StatAdjustType>k__BackingField: 0
-  <Amount>k__BackingField: 5
+  <Amount>k__BackingField: 3

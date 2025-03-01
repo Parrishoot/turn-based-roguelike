@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class PassiveAbility : ScriptableObject
+public abstract class PassiveAbility : Ability
 {
     [field:SerializeReference]
     public int Cost { get; set; }

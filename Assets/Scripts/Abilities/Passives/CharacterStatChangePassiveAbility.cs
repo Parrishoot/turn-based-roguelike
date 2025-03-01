@@ -16,4 +16,9 @@ public class CharacterStatChangePassiveAbility : PassiveAbility
     {
         return new CharacterStatChangePassiveController(StatType, new StatAdjuster(Amount, StatAdjustType), Cost);
     }
+
+    public override string GetAbilityDescription()
+    {
+        return string.Format("Increase {0} by {1} {2}", StatType, StatAdjustType, Amount);
+    }
 }
