@@ -4,10 +4,33 @@ using UnityEngine;
 public abstract class BoardOccupant: MonoBehaviour
 {
     // TODO: Implement
-    public BoardSpace Space { get; set; }
+    private BoardSpace space;
+
+    public BoardSpace Space { 
+
+        get {
+            return space;
+        } 
+        set {
+
+            if(space != null) {
+                space.Selectable.OnHoverStart -= HoverStart;
+                space.Selectable.OnHoverEnd -= HoverEnd;
+            }
+
+            space = value;
+            space.Selectable.OnHoverStart += HoverStart;
+            space.Selectable.OnHoverEnd += HoverEnd;
+        }
+    }
 
     [field:SerializeReference]
     public MovementController MovementController { get; private set; }
+
+    public EventProcessor OnSpaceHoverStart = new EventProcessor();
+
+    public EventProcessor OnSpaceHoverEnd = new EventProcessor();
+
 
     public bool IsMoveable { 
         get {
@@ -28,5 +51,13 @@ public abstract class BoardOccupant: MonoBehaviour
         }
 
         MovementController.MoveAlongPath(path);
+    }
+
+    private void HoverStart () {
+        OnSpaceHoverStart.Process();
+    }
+
+    private void HoverEnd () {
+        OnSpaceHoverEnd.Process();
     }
 }

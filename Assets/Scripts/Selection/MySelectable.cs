@@ -13,7 +13,7 @@ public class MySelectable : MonoBehaviour
 
     public bool IsSelectable { get; private set; } = true;
 
-    protected bool AllowHoverOnUnselectable { get; set; } = false;
+    protected virtual bool AllowHoverOnUnselectable { get; set; } = false;
 
     protected virtual void ProcessSelect() {
         OnSelect?.Invoke();

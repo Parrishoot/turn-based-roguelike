@@ -9,6 +9,8 @@ public class GridSelectable : MySelectable
 
     public bool Selected { get; private set; } = false;
 
+    protected override bool AllowHoverOnUnselectable => true;
+
     protected void Start() {
         SetSelectable(false);
     }

@@ -11,6 +11,9 @@ public class BoardManager : Singleton<BoardManager>
     [SerializeField]
     private GameObject gridSelectablePrefab;
 
+    [SerializeField]
+    private Transform gridSpacesTransform;
+
     public BoardSpace[,] Board { get; private set; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -44,6 +47,7 @@ public class BoardManager : Singleton<BoardManager>
         ForEachCell((x, y) => {
             Vector3 pos = Grid.GetCellCenterWorld(x, y);
             GridSelectable selectable = Instantiate(gridSelectablePrefab, pos, Quaternion.identity).GetComponent<GridSelectable>();
+            selectable.gameObject.transform.SetParent(gridSpacesTransform, true);
             Board[x, y] = new BoardSpace(new Vector2Int(x, y), selectable);
         });
     }

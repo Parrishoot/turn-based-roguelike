@@ -53,7 +53,10 @@ public class GridHighlightController : MonoBehaviour
             return;
         }
 
-        spriteRenderer.color = startingColor;
+        Color color = startingColor;
+        color.a = selectable.IsSelectable ? 1 : 0;
+
+        spriteRenderer.color = color;
     }
 
     private void StartHighlight()
@@ -62,6 +65,10 @@ public class GridHighlightController : MonoBehaviour
             return;
         }
 
-        spriteRenderer.color = hoveredColor;
+        Color color = hoveredColor;
+        color.a = selectable.IsSelectable ? 1 : 0;
+
+        spriteRenderer.color = color;
+        
     }
 }
