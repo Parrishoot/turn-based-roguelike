@@ -1,15 +1,13 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CardUIController : MonoBehaviour, IPointerClickHandler
+public class CardUIController : Draggable, IPointerClickHandler
 {
-
     private const float IDLE_ROTATE_AMOUNT = 2f; 
-    private const float IDLE_BOB_AMOUNT = 2f;
     private const float IDLE_ANIMATION_TIME = 2f;
-
     private const float ROTATE_TIME = .25f; 
 
     [SerializeField]
@@ -21,9 +19,6 @@ public class CardUIController : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     private RectTransform cardPanelTransform;
 
-    [SerializeField]
-    private Draggable cardDraggable;
-
     public Card Card { get; private set; }
 
     private PassiveController passive = null;
@@ -32,16 +27,30 @@ public class CardUIController : MonoBehaviour, IPointerClickHandler
 
     private Tween idleSequence = null;
 
+    private CardDraggableSocket currentSocket = null;
+
     private bool frontShowing = true;
+
 
     public void Setup(Card card)
     {
-        this.Card = card;
+        Card = card;
         titleText.text = card.CardName;
         descriptionText.text = card.Active.GetAbilityDescription();
 
         BeginAnimation();
     }
+    
+    void OnDestroy()
+    {
+        if(idleSequence == null) {
+            return;
+        }
+
+        idleSequence.Kill();
+    }
+
+    #region UI_ACTIONS
 
     public void Flip() {
 
@@ -51,7 +60,7 @@ public class CardUIController : MonoBehaviour, IPointerClickHandler
 
         
         frontShowing = !frontShowing;
-        cardDraggable.enabled = frontShowing;
+        DragEnabled = frontShowing;
 
         activeFlipAnimation = DOTween.Sequence()
             .Append(cardPanelTransform.DORotate(Vector3.up * 90, ROTATE_TIME / 2).SetEase(Ease.InCubic).OnComplete(UpdateFlippingCard))
@@ -61,10 +70,6 @@ public class CardUIController : MonoBehaviour, IPointerClickHandler
                 activeFlipAnimation = null;
             });
 
-    }
-
-    private void ShowPassiveActive() {
-       
     }
 
     private void UpdateFlippingCard() {
@@ -146,12 +151,91 @@ public class CardUIController : MonoBehaviour, IPointerClickHandler
         cardPanelTransform.DOScale(Vector3.one, ROTATE_TIME / 2).SetEase(Ease.InOutCubic);
     }
 
-    void OnDestroy()
+    #endregion
+
+    #region DRAGGABLE
+
+    void Update()
     {
-        if(idleSequence == null) {
+        CheckForSocket();
+    }
+
+    private void CheckForSocket()
+    {
+        if(!IsDragging) {
             return;
         }
 
-        idleSequence.Kill();
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+        pointerEventData.position = Input.mousePosition;
+
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, raycastResults);
+
+        foreach(RaycastResult raycastResult in raycastResults) {
+            CardDraggableSocket socket = raycastResult.gameObject.GetComponent<CardDraggableSocket>();
+            if(socket != null) {
+                ProcessSocketEntered(socket, raycastResult.screenPosition);
+                return;
+            }
+        }
+
+        if(currentSocket != null) {
+            ProcessSocketExited();
+        }
     }
+
+    protected override void BeginDrag()
+    {
+        EnableSockets();
+        base.BeginDrag();
+    }
+
+    protected override void EndDrag()
+    {
+        DisableSockets();
+
+        if(currentSocket != null) {
+            currentSocket.ProcessCardInserted(this);
+            return;
+        }
+    
+        base.EndDrag();
+    }
+
+    private void ProcessSocketExited() {
+        currentSocket = null;
+        Grow();
+    }
+
+    private void ProcessSocketEntered(CardDraggableSocket socket, Vector2 screenPosition) {
+
+        if(socket == currentSocket) {
+            return;
+        }
+
+        currentSocket = socket;
+        transform.position = screenPosition;
+        Shrink();
+    }
+
+    private void OnDisable()
+    {   
+        DisableSockets();
+        base.EndDrag();
+    }
+
+    private void EnableSockets() {
+        foreach(CardDraggableSocket socket in FindObjectsByType<CardDraggableSocket>(FindObjectsSortMode.None)) {
+            socket.Show();
+        }
+    }
+
+    private void DisableSockets() {
+        foreach(CardDraggableSocket socket in FindObjectsByType<CardDraggableSocket>(FindObjectsSortMode.None)) {
+            socket.Hide();
+        }
+    }
+
+    #endregion
 }

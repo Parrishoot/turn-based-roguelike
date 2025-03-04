@@ -6,24 +6,47 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     [SerializeField]
     private bool resetOnDragEnd = true;
 
+    [SerializeField]
+    private Transform draggableTransformOverride;
+
     public EventProcessor OnDragBegin { get; private set; } = new EventProcessor();
 
     public EventProcessor OnDragEnd { get; private set; } = new EventProcessor();
 
     protected bool IsDragging  { get; set; } = false;
 
+    protected bool DragEnabled { get; set; } = true;
+
+    protected virtual void Start() {
+        if(draggableTransformOverride == null) {
+            draggableTransformOverride = transform;
+        }
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if(!DragEnabled) {
+            return;
+        }
+
         BeginDrag();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if(!DragEnabled) {
+            return;
+        }
+
         SetPosition(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if(!DragEnabled) {
+            return;
+        }
+
         EndDrag();
     }
 
@@ -36,7 +59,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         IsDragging = false;
         
         if(resetOnDragEnd) {
-            transform.localPosition = Vector3.zero;
+            draggableTransformOverride.localPosition = Vector3.zero;
         }
     }
 
@@ -46,6 +69,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             return;
         }
 
-        transform.position = new Vector3(eventData.position.x, eventData.position.y, 0);
+        draggableTransformOverride.position = new Vector3(eventData.position.x, eventData.position.y, 0);
     }
 }
