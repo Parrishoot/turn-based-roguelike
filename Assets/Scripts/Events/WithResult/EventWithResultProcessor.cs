@@ -31,13 +31,13 @@ public class EventProcessor<T>
         SubscribeHandler(new EventUntilHandler<T>(onNextAction, predicate));
     }
 
-    private void SubscribeHandler(IEventHandler<T> handler)
+    public void SubscribeHandler(IEventHandler<T> handler)
     {
         OnEvent += handler.Handle;
         handlers.Add(handler);
     }
 
-    private void UnsubscribeHandler(IEventHandler<T> handler)
+    public void UnsubscribeHandler(IEventHandler<T> handler)
     {
         OnEvent -= handler.Handle;
 

@@ -8,6 +8,8 @@ public class CharacterStatChangePassiveController : PassiveController
 
     private StatAdjuster statAdjuster;
 
+    private IEventHandler<CharacterManager> characterSpawnedHandler;
+
     public CharacterStatChangePassiveController(CharacterStatType statType, StatAdjuster statAdjuster, int cost): base(cost)
     {
         this.statType = statType;
@@ -24,6 +26,8 @@ public class CharacterStatChangePassiveController : PassiveController
 
     protected override void ProcessDeactivation()
     {
+        SpawnManager.Instance.CharacterSpawned.UnsubscribeHandler(characterSpawnedHandler);
+
         foreach(CharacterManager c in GetCharacters()) {
             c.StatsManager.Stats[statType].RemoveAdjuster(statAdjuster);
         }
@@ -31,8 +35,15 @@ public class CharacterStatChangePassiveController : PassiveController
 
     protected override void ProcessActivation()
     {
+        characterSpawnedHandler = new EveryEventHandler<CharacterManager>(ApplyStat);
+        SpawnManager.Instance.CharacterSpawned.SubscribeHandler(characterSpawnedHandler);
+
         foreach(CharacterManager c in GetCharacters()) {
-            c.StatsManager.Stats[statType].AddAdjuster(statAdjuster);
+            ApplyStat(c);
         }
+    }
+
+    private void ApplyStat(CharacterManager characterManager) {
+        characterManager.StatsManager.Stats[statType].AddAdjuster(statAdjuster);
     }
 }

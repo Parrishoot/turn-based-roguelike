@@ -30,6 +30,8 @@ public class CardUIController : MonoBehaviour, IPointerClickHandler
 
     private Tween activeFlipAnimation = null;
 
+    private Tween idleSequence = null;
+
     private bool frontShowing = true;
 
     public void Setup(Card card)
@@ -104,7 +106,7 @@ public class CardUIController : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private void DiscardCard()
+    public void DiscardCard()
     {
         DeckManager.Instance.DiscardAbility(Card);
         Destroy(gameObject);
@@ -119,10 +121,10 @@ public class CardUIController : MonoBehaviour, IPointerClickHandler
         transform.eulerAngles = Vector3.forward * IDLE_ROTATE_AMOUNT;
 
         // Rotate idle animation
-        DOTween.Sequence()
-        .Append(cardPanelTransform.DORotate(Vector3.forward * -IDLE_ROTATE_AMOUNT, IDLE_ANIMATION_TIME).SetEase(Ease.InOutSine))
-        .SetLoops(-1, LoopType.Yoyo)
-        .Play();
+        idleSequence = DOTween.Sequence()
+            .Append(cardPanelTransform.DORotate(Vector3.forward * -IDLE_ROTATE_AMOUNT, IDLE_ANIMATION_TIME).SetEase(Ease.InOutSine))
+            .SetLoops(-1, LoopType.Yoyo)
+            .Play();
 
     }
 
@@ -142,5 +144,14 @@ public class CardUIController : MonoBehaviour, IPointerClickHandler
 
     public void Grow() {
         cardPanelTransform.DOScale(Vector3.one, ROTATE_TIME / 2).SetEase(Ease.InOutCubic);
+    }
+
+    void OnDestroy()
+    {
+        if(idleSequence == null) {
+            return;
+        }
+
+        idleSequence.Kill();
     }
 }
