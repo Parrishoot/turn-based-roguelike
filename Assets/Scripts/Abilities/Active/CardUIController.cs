@@ -10,12 +10,17 @@ public class CardUIController : Draggable, IPointerClickHandler
     private const float IDLE_ANIMATION_TIME = 2f;
     private const float ROTATE_TIME = .25f; 
 
+    [Header("Text")]
     [SerializeField]
     private TMP_Text titleText;
 
     [SerializeField]
     private TMP_Text descriptionText;
 
+    [SerializeField]
+    private TMP_Text manaText;
+
+    [Header("Panel")]
     [SerializeField]
     private RectTransform cardPanelTransform;
 
@@ -31,7 +36,6 @@ public class CardUIController : Draggable, IPointerClickHandler
 
     private bool frontShowing = true;
 
-
     public void Setup(Card card)
     {
         Card = card;
@@ -39,6 +43,14 @@ public class CardUIController : Draggable, IPointerClickHandler
         descriptionText.text = card.Active.GetAbilityDescription();
 
         BeginAnimation();
+    }
+    
+    void Update()
+    {
+        CheckForSocket();
+
+        manaText.text = ManaGer.Instance.AdjustedCost(Card.BaseCost).ToString();
+        DragEnabled = frontShowing && ManaGer.Instance.ManaAvailable(Card.BaseCost);
     }
     
     void OnDestroy()
@@ -60,7 +72,6 @@ public class CardUIController : Draggable, IPointerClickHandler
 
         
         frontShowing = !frontShowing;
-        DragEnabled = frontShowing;
 
         activeFlipAnimation = DOTween.Sequence()
             .Append(cardPanelTransform.DORotate(Vector3.up * 90, ROTATE_TIME / 2).SetEase(Ease.InCubic).OnComplete(UpdateFlippingCard))
@@ -88,19 +99,24 @@ public class CardUIController : Draggable, IPointerClickHandler
 
     public void UseActive(CharacterManager characterManager) {
 
-        if(PassiveActive()) {
+        if(PassiveActive() || !ManaGer.Instance.ManaAvailable(Card.BaseCost)) {
             return;
         }
 
         AbilityProcessor abilityProcessor = Card.Active.GetAbilityProcessor(characterManager);
-
         abilityProcessor.Process();
         DiscardCard();
+        ManaGer.Instance.SpendMana(Card.BaseCost);
     }
 
     public void TogglePassive() {
 
+        if(!ManaGer.Instance.ManaAvailable(Card.BaseCost)) {
+            return;
+        }
+
         if(!PassiveActive()) {
+            ManaGer.Instance.SpendMana(Card.BaseCost);
             passive = Card.Passive.GetController();
             passive.Activate();
             Shrink();
@@ -154,11 +170,6 @@ public class CardUIController : Draggable, IPointerClickHandler
     #endregion
 
     #region DRAGGABLE
-
-    void Update()
-    {
-        CheckForSocket();
-    }
 
     private void CheckForSocket()
     {

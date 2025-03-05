@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Stats", menuName = "CharacterStats", order = 1)]
+[CreateAssetMenu(fileName = "Stats", menuName = "Stats/CharacterStats", order = 1)]
 public class CharacterStats : ScriptableObject
 {
     [field:SerializeReference]

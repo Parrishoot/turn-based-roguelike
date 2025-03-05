@@ -2,24 +2,20 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CharacterStatsManager : MonoBehaviour
+public class CharacterStatsManager : StatsManager<CharacterStatType>
 {
     [SerializeField]
     private CharacterStats characterStats;
 
-    public Dictionary<CharacterStatType, AdjustableStat> Stats { get; private set; }
-
-    private void Awake()
+    protected override Dictionary<CharacterStatType, AdjustableStat> InitStats()
     {
-        Stats = new Dictionary<CharacterStatType, AdjustableStat>();
-        Stats[CharacterStatType.HEALTH] = new AdjustableStat(characterStats.Health);
-        Stats[CharacterStatType.SHIELD] = new AdjustableStat(characterStats.Shield);
-        Stats[CharacterStatType.RANGE] = new AdjustableStat(characterStats.Range);
-        Stats[CharacterStatType.DAMAGE] = new AdjustableStat(characterStats.Damage);
-        Stats[CharacterStatType.MOVEMENT] = new AdjustableStat(characterStats.Movement);
-    }
+        Dictionary<CharacterStatType, AdjustableStat> statsDict = new Dictionary<CharacterStatType, AdjustableStat>();
+        statsDict[CharacterStatType.HEALTH] = new AdjustableStat(characterStats.Health);
+        statsDict[CharacterStatType.SHIELD] = new AdjustableStat(characterStats.Shield);
+        statsDict[CharacterStatType.RANGE] = new AdjustableStat(characterStats.Range);
+        statsDict[CharacterStatType.DAMAGE] = new AdjustableStat(characterStats.Damage);
+        statsDict[CharacterStatType.MOVEMENT] = new AdjustableStat(characterStats.Movement);
 
-    public int ModifiedValue(CharacterStatType statType, int baseValue) {
-        return baseValue + Stats[statType].CurrentValue;
+        return statsDict;
     }
 }
