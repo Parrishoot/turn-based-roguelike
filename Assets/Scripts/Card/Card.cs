@@ -1,17 +1,20 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewCard", menuName = "Card", order = 1)]
-public class Card : ScriptableObject
+public class Card
 {
-    [field:SerializeReference]
+    public Card(string cardName, int baseCost, ActiveAbility active, PassiveAbility passive)
+    {
+        CardName = cardName;
+        BaseCost = baseCost;
+        Active = active;
+        Passive = passive;
+    }
+
     public string CardName { get ; private set;}
 
-    [field:SerializeReference]
     public int BaseCost { get; private set; } = 4;
     
-    [field:SerializeReference]
     public ActiveAbility Active { get; private set; }
 
-    [field:SerializeReference]
     public PassiveAbility Passive { get; private set; }
 }

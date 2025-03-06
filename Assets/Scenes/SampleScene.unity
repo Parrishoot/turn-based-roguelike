@@ -168,7 +168,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 55dc0c37ea5230540aae08cb4b215b66, type: 2}
   - {fileID: 11400000, guid: 55dc0c37ea5230540aae08cb4b215b66, type: 2}
   - {fileID: 11400000, guid: 55dc0c37ea5230540aae08cb4b215b66, type: 2}
-  handLimit: 5
+  - {fileID: 11400000, guid: 55dc0c37ea5230540aae08cb4b215b66, type: 2}
+  - {fileID: 11400000, guid: 55dc0c37ea5230540aae08cb4b215b66, type: 2}
+  - {fileID: 11400000, guid: 004e3ef3eea4f484d838b537c697ec5f, type: 2}
+  - {fileID: 11400000, guid: 004e3ef3eea4f484d838b537c697ec5f, type: 2}
+  - {fileID: 11400000, guid: 004e3ef3eea4f484d838b537c697ec5f, type: 2}
+  - {fileID: 11400000, guid: 004e3ef3eea4f484d838b537c697ec5f, type: 2}
+  - {fileID: 11400000, guid: 004e3ef3eea4f484d838b537c697ec5f, type: 2}
 --- !u!1001 &180982724
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3499,6 +3505,7 @@ GameObject:
   - component: {fileID: 1256806636}
   - component: {fileID: 1256806637}
   - component: {fileID: 1256806638}
+  - component: {fileID: 1256806639}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3547,6 +3554,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 01ad94357846fdc4495ace22d5189bad, type: 2}
+--- !u!114 &1256806639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256806635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c0bbe98250eb3941b874d6140817723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <StatsManager>k__BackingField: {fileID: 1256806638}
 --- !u!1 &1265321055
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,10 +7,7 @@ using UnityEngine;
 public class DeckManager : Singleton<DeckManager>
 {
     [SerializeField]
-    private List<Card> cards;
-    
-    [SerializeField]
-    private int handLimit = 5;
+    private List<CardSO> cards;
 
     public Action<Card> OnCardDealt { get; set; }
 
@@ -22,18 +19,21 @@ public class DeckManager : Singleton<DeckManager>
 
     public List<Card> CurrentHand { get; private set; }
 
+    private AdjustableStat handLimit;
+
     void Start()
     {
-        InitDeck();   
+        handLimit = PlayerManager.Instance.StatsManager.Stats[PlayerStatType.HAND_SIZE];
+        InitDeck();
     }
 
     private void InitDeck()
     {
         Graveyard = new List<Card>();
-        CurrentDeck = new Queue<Card>(cards.Shuffled());
+        CurrentDeck = new Queue<Card>(cards.Select(x => x.GetCard()).ToList().Shuffled());
         CurrentHand = new List<Card>();
 
-        for(int i = 0; i < handLimit; i++) {
+        for(int i = 0; i < handLimit.CurrentValue; i++) {
             DrawCard();
         }
     }
@@ -41,7 +41,7 @@ public class DeckManager : Singleton<DeckManager>
     [ProButton]
     private void DrawCard()
     {
-        if(CurrentHand.Count >= handLimit || CurrentDeck.Count <= 0) {
+        if(CurrentHand.Count >= handLimit.CurrentValue || CurrentDeck.Count <= 0) {
             return;
         }
 
@@ -63,9 +63,16 @@ public class DeckManager : Singleton<DeckManager>
         OnDeckReshuffle?.Invoke();
     }
 
-    internal void DiscardAbility(Card card)
+    public void DiscardAbility(Card card)
     {
         Graveyard.Add(card);
-        CurrentHand.RemoveAll(x => x.GetInstanceID() == card.GetInstanceID());
+        CurrentHand.Remove(card);
+    }
+
+    public void DiscardDown()
+    {
+        while(CurrentHand.Count > handLimit.CurrentValue) {
+            DiscardAbility(CurrentHand.Last());
+        }
     }
 }

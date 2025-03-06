@@ -2,14 +2,7 @@ using UnityEngine;
 
 public abstract class PassiveController 
 {
-    public int Cost { get; private set; }
-
     public bool Active { get; private set; } = false;
-
-    protected PassiveController(int cost)
-    {
-        Cost = cost;
-    }
 
     public void Activate() {
         // TODO: Add mana subtraction here

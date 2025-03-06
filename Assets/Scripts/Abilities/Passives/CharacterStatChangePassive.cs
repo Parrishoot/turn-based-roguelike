@@ -2,48 +2,44 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CharacterStatChangePassiveController : PassiveController
+public class CharacterStatChangePassiveController : StatChangePassiveController<CharacterStatType>
 {
-    private CharacterStatType statType;
-
-    private StatAdjuster statAdjuster;
-
+    
     private IEventHandler<CharacterManager> characterSpawnedHandler;
 
-    public CharacterStatChangePassiveController(CharacterStatType statType, StatAdjuster statAdjuster, int cost): base(cost)
+    public CharacterStatChangePassiveController(CharacterStatType statType, StatAdjuster statAdjuster): base(statType, statAdjuster)
     {
-        this.statType = statType;
-        this.statAdjuster = statAdjuster;
-    }
 
-    protected virtual List<CharacterManager> GetCharacters() {
-        // TODO: Migrate this to a manager
-        return GameObject.FindObjectsByType<CharacterManager>(FindObjectsSortMode.None)
-                .ToList()
-                .Where(c => c.GetCharacterType() == CharacterType.PLAYER)
-                .ToList();
     }
 
     protected override void ProcessDeactivation()
     {
         SpawnManager.Instance.CharacterSpawned.UnsubscribeHandler(characterSpawnedHandler);
-
-        foreach(CharacterManager c in GetCharacters()) {
-            c.StatsManager.Stats[statType].RemoveAdjuster(statAdjuster);
-        }
+        
+        base.ProcessDeactivation();
     }
 
     protected override void ProcessActivation()
     {
-        characterSpawnedHandler = new EveryEventHandler<CharacterManager>(ApplyStat);
+        characterSpawnedHandler = new EveryEventHandler<CharacterManager>((manager) => manager.StatsManager.Stats[statType].AddAdjuster(statAdjuster));
         SpawnManager.Instance.CharacterSpawned.SubscribeHandler(characterSpawnedHandler);
 
-        foreach(CharacterManager c in GetCharacters()) {
-            ApplyStat(c);
-        }
+        base.ProcessActivation();
     }
 
-    private void ApplyStat(CharacterManager characterManager) {
-        characterManager.StatsManager.Stats[statType].AddAdjuster(statAdjuster);
+    protected override List<StatsManager<CharacterStatType>> GetStatsManagers()
+    {
+        List<StatsManager<CharacterStatType>> statsManagers = new List<StatsManager<CharacterStatType>>();
+
+         // TODO: Migrate this to a manager
+        List<CharacterStatsManager> characters = GameObject.FindObjectsByType<CharacterManager>(FindObjectsSortMode.None)
+            .ToList()
+            .Where(c => c.GetCharacterType() == CharacterType.PLAYER)
+            .Select(c => c.StatsManager)
+            .ToList();
+
+        statsManagers.AddRange(characters);
+
+        return statsManagers;
     }
 }
