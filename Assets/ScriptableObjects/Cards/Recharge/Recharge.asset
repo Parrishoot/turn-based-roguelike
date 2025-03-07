@@ -16,3 +16,4 @@ MonoBehaviour:
   <BaseCost>k__BackingField: 10
   <Active>k__BackingField: {fileID: 11400000, guid: f9872f1097b5f7a4dbec817e5e978be4, type: 2}
   <Passive>k__BackingField: {fileID: 11400000, guid: eafe2fe016622044bab4e5368b735db2, type: 2}
+  <CharacterClasses>k__BackingField: 01000000

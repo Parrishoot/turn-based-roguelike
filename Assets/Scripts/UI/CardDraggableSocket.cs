@@ -14,6 +14,8 @@ public abstract class CardDraggableSocket : MonoBehaviour
     [SerializeField]
     private float fadeTime = .25f;
 
+    public bool Insertable { get; private set; } = false;
+
     private void Start()
     {
         Color color = backgroundImage.color;
@@ -27,11 +29,14 @@ public abstract class CardDraggableSocket : MonoBehaviour
     }
 
     public virtual void Show() {
+        
         backgroundImage.DOFade(1f, fadeTime).SetEase(Ease.InOutCubic);
 
         if(socketText != null) {
             socketText.DOFade(1f, fadeTime).SetEase(Ease.InOutCubic);            
         }
+
+        Insertable = true;
     }
 
     public virtual void Hide() {
@@ -40,7 +45,11 @@ public abstract class CardDraggableSocket : MonoBehaviour
         if(socketText != null) {
             socketText.DOFade(0f, fadeTime).SetEase(Ease.InOutCubic);            
         }
+
+        Insertable = false;
     }
 
     public abstract void ProcessCardInserted(CardUIController card);
+
+    public abstract bool CanProcessCard(Card card);
 }

@@ -185,7 +185,7 @@ public class CardUIController : Draggable, IPointerClickHandler
 
         foreach(RaycastResult raycastResult in raycastResults) {
             CardDraggableSocket socket = raycastResult.gameObject.GetComponent<CardDraggableSocket>();
-            if(socket != null) {
+            if(socket != null && socket.Insertable) {
                 ProcessSocketEntered(socket, raycastResult.screenPosition);
                 return;
             }
@@ -238,7 +238,9 @@ public class CardUIController : Draggable, IPointerClickHandler
 
     private void EnableSockets() {
         foreach(CardDraggableSocket socket in FindObjectsByType<CardDraggableSocket>(FindObjectsSortMode.None)) {
-            socket.Show();
+            if(socket.CanProcessCard(Card)) {
+                socket.Show();
+            }
         }
     }
 

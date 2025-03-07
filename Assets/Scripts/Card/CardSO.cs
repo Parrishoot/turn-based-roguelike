@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewCard", menuName = "Card", order = 1)]
@@ -16,7 +16,10 @@ public class CardSO : ScriptableObject
     [field:SerializeReference]
     public PassiveAbility Passive { get; private set; }
 
+    [field:SerializeReference]
+    public List<CharacterClass> CharacterClasses { get; private set; }
+
     public Card GetCard() {
-        return new Card(CardName, BaseCost, Active, Passive);
+        return new Card(CardName, BaseCost, Active, Passive, CharacterClasses);
     }
 }

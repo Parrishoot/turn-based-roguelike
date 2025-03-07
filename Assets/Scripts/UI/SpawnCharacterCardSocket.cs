@@ -6,9 +6,14 @@ public class SpawnCharacterCardSocket : CardDraggableSocket
     [SerializeField]
     private int baseCost = 15;
 
+    public override bool CanProcessCard(Card card)
+    {
+        return ManaGer.Instance.ManaAvailable(baseCost);
+    }
+
     public override void ProcessCardInserted(CardUIController card)
     {
-        if(!ManaGer.Instance.ManaAvailable(baseCost)) {
+        if(!CanProcessCard(card.Card)) {
             return;
         }
 
