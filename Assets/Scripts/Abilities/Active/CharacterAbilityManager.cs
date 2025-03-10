@@ -12,7 +12,7 @@ public class NPCAbilityManager : MonoBehaviour
     private List<ActiveAbility> abilities;
     
     public void UseAbility() {
-        AbilityProcessor ability = abilities[0].GetAbilityProcessor(characterManager);
+        ActiveAbilityProcessor ability = abilities[0].GetAbilityProcessor(characterManager);
         ability.OnAbilityFinish += OnAbilityFinish.Process;
 
         ability.Process();

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardSpace
@@ -17,6 +18,12 @@ public class BoardSpace
     public Vector3 WorldPosition {
         get {
             return BoardManager.Instance.Grid.GetCellCenterWorld(Cell.x, Cell.y);
+        }
+    }
+
+    public List<BoardSpace> AdjacentSpaces {
+        get {
+            return BoardManager.Instance.GetMatchingSpaces(x => x.DistanceTo(this, true) == 1);
         }
     }
 

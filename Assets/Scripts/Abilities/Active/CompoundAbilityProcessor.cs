@@ -2,12 +2,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CompoundAbilityProcessor : AbilityProcessor
+public class CompoundAbilityProcessor : ActiveAbilityProcessor
 {
-    private Queue<AbilityProcessor> abilityQueue;
+    private AbilitySelectionCriteria overallAbilitySelectionCriteria;
 
-    public CompoundAbilityProcessor(CharacterManager characterManager, List<ActiveAbility> abilities): base(characterManager) {
-        this.abilityQueue = new Queue<AbilityProcessor>(abilities.Select(x => x.GetAbilityProcessor(characterManager)));
+    private Queue<ActiveAbility> abilityQueue;
+
+    private CharacterManager characterManager;
+
+    public CompoundAbilityProcessor(CharacterManager characterManager, List<ActiveAbility> abilities, AbilitySelectionCriteria abilitySelectionCriteria): base(characterManager) {
+        this.abilityQueue = new Queue<ActiveAbility>(abilities);
+        this.overallAbilitySelectionCriteria = abilitySelectionCriteria;
+        this.characterManager = characterManager;
     }
 
     public override void Process()
@@ -17,8 +23,16 @@ public class CompoundAbilityProcessor : AbilityProcessor
             return;
         }
 
-        AbilityProcessor nextAbility = abilityQueue.Dequeue();
-        nextAbility.OnAbilityFinish += Process;
-        nextAbility.Process();
+        ActiveAbility nextAbility = abilityQueue.Dequeue();
+        AbilitySelectionCriteria abilitySelectionCriteria = new AbilitySelectionCriteria()
+            .WithOverallAbilityType(overallAbilitySelectionCriteria.OverallAbilityType)
+            .WithCurrentAbilityType(nextAbility.GetDefaultAbilitySelectionCriteria(characterManager).CurrentAbilityType)
+            .WithRangeToTarget(overallAbilitySelectionCriteria.RangeToTarget);
+    
+        nextAbility.AbilitySelectionCriteriaOverride = abilitySelectionCriteria;
+        ActiveAbilityProcessor nextAbilityProcessor = nextAbility.GetAbilityProcessor(characterManager);
+
+        nextAbilityProcessor.OnAbilityFinish += Process;
+        nextAbilityProcessor.Process();
     }
 }

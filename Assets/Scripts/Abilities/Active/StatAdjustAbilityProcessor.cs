@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StatAdjustAbilityProcessor : AbilityProcessor
+public class StatAdjustAbilityProcessor : ActiveAbilityProcessor
 {
     private StatAdjuster statAdjuster;
 

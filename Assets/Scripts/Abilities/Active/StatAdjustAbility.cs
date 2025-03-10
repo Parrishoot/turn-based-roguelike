@@ -17,8 +17,14 @@ public class StatAdjustAbility : ActiveAbility
         return string.Format("Increase {0} by {1} {2}", statType, statAdjusterType, adjustmentValue);
     }
 
-    public override AbilityProcessor GetAbilityProcessor(CharacterManager characterManager)
+    public override ActiveAbilityProcessor GetAbilityProcessor(CharacterManager characterManager)
     {
         return new StatAdjustAbilityProcessor(characterManager, statType, new StatAdjuster(adjustmentValue, statAdjusterType));
+    }
+
+    public override AbilitySelectionCriteria GetDefaultAbilitySelectionCriteria(CharacterManager characterManager)
+    {
+        return new AbilitySelectionCriteria()
+            .WithAbilityType(AbilityType.OFFENSIVE);
     }
 }

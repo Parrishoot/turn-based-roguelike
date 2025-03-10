@@ -32,6 +32,8 @@ public class HealthController : MonoBehaviour
         currentDamage -= remainingDamage;
         OnDamageTaken?.Invoke(remainingDamage);
 
+        Debug.Log(gameObject.name + " took " + remainingDamage.ToString() + " damage!");
+
         if(CurrentHealth <= 0) {
             OnDeath?.Invoke();
         }

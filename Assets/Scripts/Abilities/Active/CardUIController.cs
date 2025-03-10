@@ -103,7 +103,7 @@ public class CardUIController : Draggable, IPointerClickHandler
             return;
         }
 
-        AbilityProcessor abilityProcessor = Card.Active.GetAbilityProcessor(characterManager);
+        ActiveAbilityProcessor abilityProcessor = Card.Active.GetAbilityProcessor(characterManager);
         abilityProcessor.Process();
         DiscardCard();
         ManaGer.Instance.SpendMana(Card.BaseCost);

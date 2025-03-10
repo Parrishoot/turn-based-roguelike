@@ -4,5 +4,6 @@ public enum CharacterClass
 {
     MAGE,
     ROGUE,
-    TANK
+    TANK,
+    TOTEM
 }

@@ -17,8 +17,8 @@ public class NPCCharacterManager : CharacterManager
         return characterType;
     }
 
-    public override ISelectionController GetSelectionController()
+    public override ISelectionController GetAbilitySelectionController(AbilitySelectionCriteria abilitySelectionCriteria)
     {
-        return selectionControllerOverride == null ? new RandomSelectionController() : selectionControllerOverride;
+        return selectionControllerOverride == null ? new EnemyAbilitySelectionController(this, abilitySelectionCriteria) : selectionControllerOverride;
     }
 }

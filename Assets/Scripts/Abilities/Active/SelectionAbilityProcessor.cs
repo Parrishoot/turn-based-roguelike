@@ -1,5 +1,5 @@
 
-public class SelectionAbilityProcessor : AbilityProcessor
+public class SelectionAbilityProcessor : ActiveAbilityProcessor
 {
     private ISelectionController abilitySelectionController;
 

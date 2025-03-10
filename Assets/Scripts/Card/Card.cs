@@ -24,8 +24,9 @@ public class Card
 
     public bool CanPlayOnCharacter(CharacterClass characterClass) {
 
+        // If none are supplied - assume all but Totem are allowed
         if(CharacterClasses.Count == 0) {
-            return true;
+            return characterClass != CharacterClass.TOTEM;
         }
 
         return CharacterClasses.Contains(characterClass);

@@ -14,11 +14,17 @@ public class PushAbility : ActiveAbility
         return string.Format("Push {0} target(s) up to {1} range", NumTargets, Range);
     }
 
-    public override AbilityProcessor GetAbilityProcessor(CharacterManager characterManager)
+    public override ActiveAbilityProcessor GetAbilityProcessor(CharacterManager characterManager)
     {
-        ISelectionController selectionController = characterManager.GetSelectionController();
+        ISelectionController selectionController = characterManager.GetAbilitySelectionController(GetAbilitySelectionCriteria(characterManager));
         SelectionProcessor selectionProcessor = new PushSelectionProcessor(characterManager, NumTargets, Range);
 
         return new SelectionAbilityProcessor(characterManager, selectionController, selectionProcessor);
+    }
+
+    public override AbilitySelectionCriteria GetDefaultAbilitySelectionCriteria(CharacterManager characterManager)
+    {
+        return new AbilitySelectionCriteria()
+            .WithAbilityType(AbilityType.OFFENSIVE);
     }
 }

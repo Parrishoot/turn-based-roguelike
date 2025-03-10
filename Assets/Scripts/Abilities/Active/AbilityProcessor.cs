@@ -1,10 +1,10 @@
 using System;
 
-public abstract class AbilityProcessor
+public abstract class ActiveAbilityProcessor
 {
     protected CharacterManager CharacterManager { get; private set; }
 
-    protected AbilityProcessor(CharacterManager characterManager)
+    protected ActiveAbilityProcessor(CharacterManager characterManager)
     {
         this.CharacterManager = characterManager;
     }

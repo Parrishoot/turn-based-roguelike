@@ -7,5 +7,12 @@ public abstract class ActiveAbility : Ability
         GetAbilityProcessor(characterManager).Process();
     }
 
-    public abstract AbilityProcessor GetAbilityProcessor(CharacterManager characterManager);
+    public AbilitySelectionCriteria AbilitySelectionCriteriaOverride { get; set; }
+
+    public AbilitySelectionCriteria GetAbilitySelectionCriteria(CharacterManager characterManager) {
+        return AbilitySelectionCriteriaOverride == null ? GetDefaultAbilitySelectionCriteria(characterManager) : AbilitySelectionCriteriaOverride;
+    }
+
+    public abstract ActiveAbilityProcessor GetAbilityProcessor(CharacterManager characterManager);
+    public abstract AbilitySelectionCriteria GetDefaultAbilitySelectionCriteria(CharacterManager characterManager);
 }
