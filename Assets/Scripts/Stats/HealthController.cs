@@ -8,7 +8,19 @@ public class HealthController : MonoBehaviour
 
     public int CurrentHealth { 
         get {
-            return Math.Max(0, characterManager.StatsManager.Stats[CharacterStatType.HEALTH].CurrentValue - currentDamage);
+            return Math.Max(0, MaxHealth - currentDamage);
+        }
+    }
+
+    public int CurrentShield { 
+        get {
+            return characterManager.StatsManager.Stats[CharacterStatType.SHIELD].CurrentValue;
+        }
+    }
+
+    public int MaxHealth { 
+        get {
+            return characterManager.StatsManager.Stats[CharacterStatType.HEALTH].CurrentValue;
         }
     }
 
@@ -29,7 +41,7 @@ public class HealthController : MonoBehaviour
             return;
         }
 
-        currentDamage -= remainingDamage;
+        currentDamage += remainingDamage;
         OnDamageTaken?.Invoke(remainingDamage);
 
         Debug.Log(gameObject.name + " took " + remainingDamage.ToString() + " damage!");
@@ -47,7 +59,7 @@ public class HealthController : MonoBehaviour
 
     private int ProcessShield(int damage)
     {
-        int shieldedDamage = Mathf.Min(damage, characterManager.StatsManager.Stats[CharacterStatType.SHIELD].CurrentValue);
+        int shieldedDamage = Mathf.Min(damage, CurrentShield);
 
         if(shieldedDamage > 0) {
             damage -= shieldedDamage;
