@@ -11,7 +11,7 @@ public abstract class CharacterManager : BoardOccupant
 
     public abstract ISelectionController GetAbilitySelectionController(AbilitySelectionCriteria abilitySelectionCriteria);
 
-    public override void Damage(int damage)
+    public override void Damage(int damage, bool shieldable=false)
     {
         HealthController?.TakeDamage(damage);
     }

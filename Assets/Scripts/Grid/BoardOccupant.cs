@@ -32,16 +32,16 @@ public abstract class BoardOccupant: MonoBehaviour
     public EventProcessor OnSpaceHoverEnd = new EventProcessor();
 
 
-    public bool IsMoveable { 
-        get {
-            return MovementController != null;
-        }
-    }
+    public bool IsMoveable => MovementController != null;
 
     public abstract CharacterType GetCharacterType();
 
-    public virtual void Damage(int damage) {
+    public virtual void Damage(int damage, bool shieldable=false) {
 
+    }
+
+    public virtual void ApplyStatus(StatusEffectType effectType) {
+        
     }
 
     public virtual void Move(Path path) {
