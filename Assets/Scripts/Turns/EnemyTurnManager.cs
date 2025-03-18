@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyTurnManager : TurnManager
 {
-    public override TurnType GetTurnType() => TurnType.CPU;
+    public override TurnType GetTurnType() => TurnType.ENEMY_CPU;
 
     public override void StartTurn()
     {

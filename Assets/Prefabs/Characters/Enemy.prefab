@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1102069290117108287, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
+      propertyPath: characterManager
+      value: 
+      objectReference: {fileID: 6362830738174737454}
+    - target: {fileID: 1875533667796253262, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
+      propertyPath: characterStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 0f08485f4f267794d96131e801826d6e, type: 2}
     - target: {fileID: 3865702178680000563, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -114,6 +122,7 @@ MonoBehaviour:
   <MovementController>k__BackingField: {fileID: 6318952042888598863}
   <HealthController>k__BackingField: {fileID: 678137514499702148}
   <StatsManager>k__BackingField: {fileID: 8303547255135487145}
+  <StatusEffectManager>k__BackingField: {fileID: 7381485539289902296}
   characterType: 2
   <AbilityManager>k__BackingField: {fileID: 2185421600557934873}
 --- !u!114 &2185421600557934873
@@ -140,6 +149,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f24945c5596d44d4da90c0ee5e64773d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7381485539289902296 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1102069290117108287, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
+  m_PrefabInstance: {fileID: 7582684991050661607}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143110473302080171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661bece4b33a575439e08e736d518743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8303547255135487145 stripped

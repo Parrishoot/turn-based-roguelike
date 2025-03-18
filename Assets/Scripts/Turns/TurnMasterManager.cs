@@ -9,7 +9,11 @@ public class TurnMasterManager: Singleton<TurnMasterManager>
 
     public EventProcessor<TurnType> OnTurnStarted = new EventProcessor<TurnType>();
 
+    public EventProcessor<TurnType> OnTurnEnded = new EventProcessor<TurnType>();
+
     private LoopingQueue<TurnManager> turnQueue;
+
+    private TurnManager currentTurnManager;
 
     private void Start() {
 
@@ -21,11 +25,15 @@ public class TurnMasterManager: Singleton<TurnMasterManager>
     }
 
     private void TransitionToNextTurn() {
-        
-        TurnManager next = turnQueue.GetNext();
 
-        OnTurnStarted.Process(next.GetTurnType());
-        next.StartTurn();
+        if(currentTurnManager != null) {
+            OnTurnEnded.Process(currentTurnManager.GetTurnType());
+        }   
+
+        currentTurnManager = turnQueue.GetNext();
+
+        OnTurnStarted.Process(currentTurnManager.GetTurnType());
+        currentTurnManager.StartTurn();
     }
 
     [ProButton]

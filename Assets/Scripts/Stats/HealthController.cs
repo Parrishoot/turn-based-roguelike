@@ -34,9 +34,14 @@ public class HealthController : MonoBehaviour
 
     public Action OnDeath { get; set; }
 
-    public void TakeDamage(int damage) {
+    public void TakeDamage(int damage, bool shieldable=true) {
 
-        int remainingDamage = ProcessShield(damage);
+        int remainingDamage = damage;
+
+        if(shieldable) {
+            remainingDamage = ProcessShield(damage);
+        }
+        
         if(remainingDamage <= 0) {
             return;
         }

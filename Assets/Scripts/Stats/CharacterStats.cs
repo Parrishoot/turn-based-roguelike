@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Stats", menuName = "Stats/CharacterStats", order = 1)]
@@ -17,5 +18,8 @@ public class CharacterStats : ScriptableObject
 
     [field:SerializeReference]
     public int Range = 1;
+
+    [field:SerializeReference]
+    public List<StatusEffectType> Immunities { get; private set; }
 
 }

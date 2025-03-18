@@ -3,5 +3,6 @@ using UnityEngine;
 public enum TurnType
 {
    PLAYER,
-   CPU
+   ENEMY_CPU,
+   ALLY_CPU
 }

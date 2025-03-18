@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d7ff0ebfcf98942b8db1324b7407e6, type: 3}
+  m_Name: DontStop_Card
+  m_EditorClassIdentifier: 
+  <CardName>k__BackingField: Don't Stop
+  <BaseCost>k__BackingField: 6
+  <Active>k__BackingField: {fileID: 11400000, guid: 34ec95561e10cc1479cdb1419f9eb1ac, type: 2}
+  <Passive>k__BackingField: {fileID: 11400000, guid: b344b98ea0f4841408c6ab82033e6d75, type: 2}
+  <CharacterClasses>k__BackingField: 

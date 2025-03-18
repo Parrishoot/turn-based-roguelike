@@ -14,5 +14,6 @@ public abstract class ActiveAbility : Ability
     }
 
     public abstract ActiveAbilityProcessor GetAbilityProcessor(CharacterManager characterManager);
+    
     public abstract AbilitySelectionCriteria GetDefaultAbilitySelectionCriteria(CharacterManager characterManager);
 }

@@ -7,6 +7,8 @@ public class CharacterStatsManager : StatsManager<CharacterStatType>
     [SerializeField]
     private CharacterStats characterStats;
 
+    public List<StatusEffectType> Immunities => characterStats.Immunities;
+
     protected override Dictionary<CharacterStatType, AdjustableStat> InitStats()
     {
         Dictionary<CharacterStatType, AdjustableStat> statsDict = new Dictionary<CharacterStatType, AdjustableStat>();
