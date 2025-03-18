@@ -8,11 +8,13 @@ public class ShockwaveController : StatusEffectController
 {
     private const int DAMAGE = 1;
 
-    public ShockwaveController(CharacterManager characterManager, bool perpetual=true) : base(characterManager, perpetual)
+    public ShockwaveController(CharacterManager characterManager) : base(characterManager)
     {
     }
 
     public override StatusEffectType EffectType => StatusEffectType.SHOCKWAVE;
+
+    public override bool Perpetual => true;
 
     public override void Apply()
     {
@@ -23,8 +25,8 @@ public class ShockwaveController : StatusEffectController
     {
         foreach(BoardSpace adjacentSpace in CharacterManager.Space.AdjacentSpaces) {
             
-            if(!CharacterManager.GetCharacterType().GetAlliedCharacterTypes().Contains(adjacentSpace.Occupant.GetCharacterType())) {
-                return;
+            if(!adjacentSpace.IsOccupied || !CharacterManager.GetCharacterType().GetAlliedCharacterTypes().Contains(adjacentSpace.Occupant.GetCharacterType())) {
+                continue;
             }
 
             adjacentSpace.Occupant.Damage(DAMAGE, true);

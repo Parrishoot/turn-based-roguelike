@@ -1,19 +1,20 @@
 using UnityEngine;
 
-public abstract class StatusEffectController : MonoBehaviour
+public abstract class StatusEffectController
 {
     public abstract StatusEffectType EffectType { get; }
+
+    public abstract bool Perpetual { get; }
+
+    public virtual bool Negative => true;
 
     public virtual bool Stackable => false;
 
     protected CharacterManager CharacterManager { get; private set; }
 
-    public bool Perpetual { get; private set; } = true;
-
-    protected StatusEffectController(CharacterManager characterManager, bool perpetual=true)
+    protected StatusEffectController(CharacterManager characterManager)
     {
         CharacterManager = characterManager;
-        Perpetual = perpetual;
     }
 
     public abstract void Apply();

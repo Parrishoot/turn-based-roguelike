@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Pathfinding;
 using UnityEngine;
 
@@ -31,17 +32,24 @@ public abstract class BoardOccupant: MonoBehaviour
 
     public EventProcessor OnSpaceHoverEnd = new EventProcessor();
 
+    public EventProcessor OnTurnBegin = new EventProcessor();
+
+    public EventProcessor OnTurnEnd = new EventProcessor();
 
     public bool IsMoveable => MovementController != null;
 
     public abstract CharacterType GetCharacterType();
+
+    public abstract ISet<StatusEffectType> Immunities { get; }
+
+    public virtual TurnType? CharacterTurnType => GetCharacterType().GetDefaultTurnType();
 
     public virtual void Damage(int damage, bool shieldable=false) {
 
     }
 
     public virtual void ApplyStatus(StatusEffectType effectType) {
-        
+
     }
 
     public virtual void Move(Path path) {
@@ -59,5 +67,33 @@ public abstract class BoardOccupant: MonoBehaviour
 
     private void HoverEnd () {
         OnSpaceHoverEnd.Process();
+    }
+
+    public void Start()
+    {
+        if(!CharacterTurnType.HasValue) {
+            return;
+        }
+
+        TurnMasterManager.Instance.OnTurnStarted.OnEvery(CheckForTurnBeginning);
+        TurnMasterManager.Instance.OnTurnEnded.OnEvery(CheckForTurnEnding);
+    }   
+
+    private void CheckForTurnBeginning(TurnType turnType) {
+
+        if(!CharacterTurnType.HasValue || turnType != CharacterTurnType.Value) {
+            return;
+        }
+        
+        OnTurnBegin.Process();
+    }
+
+    private void CheckForTurnEnding(TurnType turnType) {
+        
+        if(!CharacterTurnType.HasValue || turnType != CharacterTurnType.Value) {
+            return;
+        }
+        
+        OnTurnEnd.Process();
     }
 }

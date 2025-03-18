@@ -23,4 +23,16 @@ public static class CharacterTypeUtil
         };
 
     }
+
+    public static TurnType? GetDefaultTurnType(this CharacterType characterType) {
+
+        return characterType switch
+        {
+            CharacterType.PLAYER => TurnType.PLAYER,
+            CharacterType.ALLY => TurnType.ALLY_CPU,
+            CharacterType.ENEMY => TurnType.ENEMY_CPU,
+            _ => null,
+        };
+
+    }
 }
