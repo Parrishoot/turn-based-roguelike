@@ -19,7 +19,7 @@ public class CharacterPanelManager : Singleton<CharacterPanelManager>
 
     public void RemoveAttributeController(CharacterManager characterManager) {
         
-        CharacterAttributeUIManager attributeManager = characterAttributePanels.Where(x => x.CharacterManager == characterManager).First();
+        CharacterAttributeUIManager attributeManager = GetAttributePanelForCharacter(characterManager);
         
         if(attributeManager == null) {
             return;
@@ -27,5 +27,9 @@ public class CharacterPanelManager : Singleton<CharacterPanelManager>
         
         characterAttributePanels.Remove(attributeManager);
         Destroy(attributeManager.gameObject);
+    }
+
+    public CharacterAttributeUIManager GetAttributePanelForCharacter(CharacterManager characterManager) {
+        return characterAttributePanels.Where(x => x.CharacterManager == characterManager).First();
     }
 }

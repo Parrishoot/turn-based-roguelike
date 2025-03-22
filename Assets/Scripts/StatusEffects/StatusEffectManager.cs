@@ -10,6 +10,8 @@ public class StatusEffectManager : MonoBehaviour
 
     private List<StatusEffectController> statusEffects = new List<StatusEffectController>();
 
+    private List<StatusEffectAttributeUIController> uiPanels = new List<StatusEffectAttributeUIController>();
+
     public ISet<StatusEffectType> CurrentImmunities = new HashSet<StatusEffectType>();
 
     private void Start()
@@ -28,10 +30,37 @@ public class StatusEffectManager : MonoBehaviour
             StatusEffectController controller = statusEffects[i];
             
             if(!controller.Perpetual) {
-                controller.Remove();
-                statusEffects.RemoveAt(i);
+                Remove(controller);
             }
         }
+    }
+
+    public void Remove(StatusEffectController statusEffectController) {
+        statusEffectController.Remove();
+        statusEffects.Remove(statusEffectController);
+        RemoveUIPanel(statusEffectController);
+    }
+
+    public void Remove(StatusEffectType statusEffectType) {
+
+        StatusEffectController statusEffectController = statusEffects.Where(x => x.EffectType == statusEffectType).First();
+
+        if(statusEffectController != null) {
+            Remove(statusEffectController);
+        }
+    }
+
+    private void RemoveUIPanel(StatusEffectController statusEffectController) {
+        
+        StatusEffectAttributeUIController controller = uiPanels.Where(x => x.Controller == statusEffectController).First();
+        CharacterAttributeUIManager attributeManager = CharacterPanelManager.Instance.GetAttributePanelForCharacter(characterManager);
+        
+        if(controller == null || attributeManager == null) {
+            return;
+        }
+
+        attributeManager.RemoveAttributeController(controller);
+        uiPanels.Remove(controller);
     }
 
     public void Apply(StatusEffectType statusEffectType) {
@@ -50,5 +79,12 @@ public class StatusEffectManager : MonoBehaviour
         StatusEffectController controller = statusEffectType.GetController(characterManager);
         controller.Apply();
         statusEffects.Add(controller);
+
+        CharacterAttributeUIManager attributeManager = CharacterPanelManager.Instance.GetAttributePanelForCharacter(characterManager);
+        if(attributeManager == null) {
+            return;
+        }
+
+        uiPanels.Add(attributeManager.AddStatusEffectPanel(controller));
     }
 }

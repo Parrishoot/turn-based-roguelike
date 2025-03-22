@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -10,13 +11,21 @@ public class CharacterAttributeUIManager : MonoBehaviour, IPointerEnterHandler, 
     private TMP_Text characterNameText;
 
     [SerializeField]
-    private GameObject statsAttributeControllerPrefab;
+    private HealthbarUIController healthbarUIController;
 
     [SerializeField]
     private Transform attributesPanelTransform;
 
+    [Header("Prefabs")]    
+
     [SerializeField]
-    private HealthbarUIController healthbarUIController;
+    private GameObject statsAttributeControllerPrefab;
+
+    [SerializeField]
+    private GameObject immunityControllerPrefab;
+
+    [SerializeField]
+    private GameObject statusEffectControllerPrefab;
 
     public CharacterManager CharacterManager { get; private set; }
 
@@ -29,26 +38,51 @@ public class CharacterAttributeUIManager : MonoBehaviour, IPointerEnterHandler, 
         characterNameText.text = characterManager.ProfileManager.Profile.CharacterName;
         healthbarUIController.Init(characterManager);
 
-        AddAttributeController(statsAttributeControllerPrefab);
+        InitPanels();
     }
 
-    public void AddAttributeController(GameObject prefab) {
-        
-        GameObject controllerObject = Instantiate(prefab, attributesPanelTransform);
-        CharacterAttributesUIController controller = controllerObject.GetComponent<CharacterAttributesUIController>();
+    private void InitPanels()
+    {
+        AddStatsPanel();
 
-        if(controller == null) {
-            Debug.LogWarning("Trying to instantiate attributes controller prefab with no attributes component. Destroying.");
-            Destroy(controllerObject);
-        } 
+        foreach(StatusEffectType statusEffectType in CharacterManager.ProfileManager.Profile.Stats.Immunities) {
+            AddImmunityPanel(statusEffectType);
+        }
+    }
+
+    public CharacterStatsUIController AddStatsPanel() {
+        GameObject controllerObject = Instantiate(statsAttributeControllerPrefab, attributesPanelTransform);
+        CharacterStatsUIController controller = controllerObject.GetComponent<CharacterStatsUIController>();
+        controller.Init(CharacterManager);
 
         AddAttributeController(controller);
+
+        return controller;
+    }
+
+    public ImmunityAttributeUIController AddImmunityPanel(StatusEffectType statusEffectType) {
+        GameObject controllerObject = Instantiate(immunityControllerPrefab, attributesPanelTransform);
+        ImmunityAttributeUIController controller = controllerObject.GetComponent<ImmunityAttributeUIController>();
+        controller.Init(statusEffectType);
+
+        AddAttributeController(controller);
+
+        return controller;
+    }
+
+    public StatusEffectAttributeUIController AddStatusEffectPanel(StatusEffectController statusEffectController) {
+        GameObject controllerObject = Instantiate(statusEffectControllerPrefab, attributesPanelTransform);
+        StatusEffectAttributeUIController controller = controllerObject.GetComponent<StatusEffectAttributeUIController>();
+        controller.Init(statusEffectController);
+
+        AddAttributeController(controller);
+
+        return controller;
     }
 
     public CharacterAttributesUIController AddAttributeController(CharacterAttributesUIController controller) {
         
         controller.gameObject.transform.SetParent(attributesPanelTransform, false);
-        controller.Init(CharacterManager);
         controller.Hide();
 
         attributeControllers.Add(controller);

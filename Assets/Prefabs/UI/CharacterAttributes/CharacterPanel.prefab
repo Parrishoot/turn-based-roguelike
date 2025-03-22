@@ -293,9 +293,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterNameText: {fileID: 4598979187531979238}
-  statsAttributeControllerPrefab: {fileID: 7988698413797641054, guid: efb45a822ace9b34d929fda2787ddfd7, type: 3}
-  attributesPanelTransform: {fileID: 8680152819770700481}
   healthbarUIController: {fileID: 2078728516796657310}
+  attributesPanelTransform: {fileID: 8680152819770700481}
+  statsAttributeControllerPrefab: {fileID: 913926397593562422, guid: be53c3644dfa4334c9612bc2a627c3f5, type: 3}
+  immunityControllerPrefab: {fileID: 5909058928854312123, guid: 759be0fb0e87d4f4a83b6259417e8bdb, type: 3}
+  statusEffectControllerPrefab: {fileID: 5909058928854312123, guid: 11e2a8532d2bcf74dbafa9d228f99ef1, type: 3}
 --- !u!1 &8704246031425717131
 GameObject:
   m_ObjectHideFlags: 0
