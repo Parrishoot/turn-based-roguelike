@@ -22,7 +22,7 @@ public class MovementSelectionProcessor : SelectionProcessor
     protected bool IsWalkable(BoardSpace boardSpace) {
         
         // Check for basic distance and occupation of space
-        int totalRange = characterManager.StatsManager.ModifiedValue(CharacterStatType.MOVEMENT, range);
+        int totalRange = characterManager.ProfileManager.ModifiedValue(CharacterStatType.MOVEMENT, range);
         int distance = characterManager.Space.DistanceTo(boardSpace);
         if(boardSpace.IsOccupied || distance > totalRange) {
             return false;
@@ -42,7 +42,7 @@ public class MovementSelectionProcessor : SelectionProcessor
 
         BoardSpace targetSpace = selectedSpaces.First();
 
-        int totalRange = characterManager.StatsManager.ModifiedValue(CharacterStatType.MOVEMENT, range);
+        int totalRange = characterManager.ProfileManager.ModifiedValue(CharacterStatType.MOVEMENT, range);
         Path path = PathFinder.FindPath(BoardManager.Instance.Board, characterManager.Space, targetSpace, totalRange);
 
         characterManager.MovementController.OnMovementFinished.OnNext(() => OnSelectionProcessed?.Invoke());

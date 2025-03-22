@@ -8,15 +8,21 @@ public class HealthbarUIController : MonoBehaviour
     private const string HEALTH_PERCENT = "_HealthPercent";
 
     [SerializeField]
-    private HealthController healthController;
-
-    [SerializeField]
     private Image background;
 
     [SerializeField]
     private TMP_Text text;
 
+    [SerializeField]    
+    private HealthController healthController;
+
     private Material material;
+
+    public void Init(CharacterManager characterManager) {
+        if(healthController == null) {
+            healthController = characterManager.HealthController;
+        }
+    } 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -8,7 +8,7 @@ public abstract class CharacterManager : BoardOccupant
     public HealthController HealthController { get; private set; }
 
     [field:SerializeReference]
-    public CharacterStatsManager StatsManager { get; private set; }
+    public CharacterProfileManager ProfileManager { get; private set; }
 
     [field:SerializeReference]
     public StatusEffectManager StatusEffectManager { get; private set; }
@@ -16,6 +16,11 @@ public abstract class CharacterManager : BoardOccupant
     public abstract ISelectionController GetAbilitySelectionController(AbilitySelectionCriteria abilitySelectionCriteria);
 
     public override ISet<StatusEffectType> Immunities => StatusEffectManager.CurrentImmunities;
+
+    protected override void Start() {
+        base.Start();
+        CharacterPanelManager.Instance.AddCharacterAttributePanel(this);
+    }
 
     public override void Damage(int damage, bool shieldable=false)
     {

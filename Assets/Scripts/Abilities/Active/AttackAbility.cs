@@ -30,6 +30,6 @@ public class AttackAbility : ActiveAbility
     {
         return new AbilitySelectionCriteria()
             .WithAbilityType(AbilityType.OFFENSIVE)
-            .WithRangeToTarget(characterManager.StatsManager.ModifiedValue(CharacterStatType.RANGE, Range));
+            .WithRangeToTarget(characterManager.ProfileManager.ModifiedValue(CharacterStatType.RANGE, Range));
     }
 }

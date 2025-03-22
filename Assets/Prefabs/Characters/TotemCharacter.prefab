@@ -131,9 +131,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5844153073796334050, guid: 4ef09d3745bb0b24f9616c8307036a73, type: 3}
+      propertyPath: profile
+      value: 
+      objectReference: {fileID: 11400000, guid: 68977945b1156e24dba0fd1f4388427b, type: 2}
+    - target: {fileID: 5844153073796334050, guid: 4ef09d3745bb0b24f9616c8307036a73, type: 3}
       propertyPath: characterStats
       value: 
       objectReference: {fileID: 11400000, guid: 39fc37bc245cfdf40ba63583734e9450, type: 2}
+    - target: {fileID: 5844153073796334050, guid: 4ef09d3745bb0b24f9616c8307036a73, type: 3}
+      propertyPath: <Profile>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 68977945b1156e24dba0fd1f4388427b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1126312498759279528, guid: 4ef09d3745bb0b24f9616c8307036a73, type: 3}

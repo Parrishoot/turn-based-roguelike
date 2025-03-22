@@ -21,7 +21,7 @@ public class CharacterStatChangePassiveController : StatChangePassiveController<
 
     protected override void ProcessActivation()
     {
-        characterSpawnedHandler = new EveryEventHandler<CharacterManager>((manager) => manager.StatsManager.Stats[statType].AddAdjuster(statAdjuster));
+        characterSpawnedHandler = new EveryEventHandler<CharacterManager>((manager) => manager.ProfileManager.Stats[statType].AddAdjuster(statAdjuster));
         SpawnManager.Instance.CharacterSpawned.SubscribeHandler(characterSpawnedHandler);
 
         base.ProcessActivation();
@@ -32,10 +32,10 @@ public class CharacterStatChangePassiveController : StatChangePassiveController<
         List<StatsManager<CharacterStatType>> statsManagers = new List<StatsManager<CharacterStatType>>();
 
          // TODO: Migrate this to a manager
-        List<CharacterStatsManager> characters = GameObject.FindObjectsByType<CharacterManager>(FindObjectsSortMode.None)
+        List<CharacterProfileManager> characters = GameObject.FindObjectsByType<CharacterManager>(FindObjectsSortMode.None)
             .ToList()
             .Where(c => c.GetCharacterType() == CharacterType.PLAYER)
-            .Select(c => c.StatsManager)
+            .Select(c => c.ProfileManager)
             .ToList();
 
         statsManagers.AddRange(characters);

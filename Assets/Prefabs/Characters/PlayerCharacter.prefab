@@ -250,6 +250,14 @@ PrefabInstance:
       propertyPath: characterManager
       value: 
       objectReference: {fileID: -5863114017965164016}
+    - target: {fileID: 1875533667796253262, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
+      propertyPath: profile
+      value: 
+      objectReference: {fileID: 11400000, guid: ceff1b4e9f16b7f4e80a1946ff1e4b69, type: 2}
+    - target: {fileID: 1875533667796253262, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
+      propertyPath: <Profile>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: ceff1b4e9f16b7f4e80a1946ff1e4b69, type: 2}
     - target: {fileID: 4506544893851085736, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
       propertyPath: <CharacterManager>k__BackingField
       value: 
@@ -344,7 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MovementController>k__BackingField: {fileID: 8473477733068607492}
   <HealthController>k__BackingField: {fileID: 3120853822301862095}
-  <StatsManager>k__BackingField: {fileID: 5844153073796334050}
+  <ProfileManager>k__BackingField: {fileID: 5844153073796334050}
   <StatusEffectManager>k__BackingField: {fileID: 4924395375775230355}
   <Class>k__BackingField: 0
 --- !u!114 &3120853822301862095 stripped

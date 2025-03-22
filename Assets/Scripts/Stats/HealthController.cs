@@ -14,13 +14,13 @@ public class HealthController : MonoBehaviour
 
     public int CurrentShield { 
         get {
-            return characterManager.StatsManager.Stats[CharacterStatType.SHIELD].CurrentValue;
+            return characterManager.ProfileManager.Stats[CharacterStatType.SHIELD].CurrentValue;
         }
     }
 
     public int MaxHealth { 
         get {
-            return characterManager.StatsManager.Stats[CharacterStatType.HEALTH].CurrentValue;
+            return characterManager.ProfileManager.Stats[CharacterStatType.HEALTH].CurrentValue;
         }
     }
 

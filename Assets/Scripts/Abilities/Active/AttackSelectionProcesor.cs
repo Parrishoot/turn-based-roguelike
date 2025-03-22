@@ -22,7 +22,7 @@ public class AttackSelectionProcessor : SelectionProcessor
 
     public override SelectionCriteria GetCriteria()
     {
-        int totalRange = characterManager.StatsManager.ModifiedValue(CharacterStatType.RANGE, range);
+        int totalRange = characterManager.ProfileManager.ModifiedValue(CharacterStatType.RANGE, range);
 
         return new SelectionCriteria()
             .WithMaxSelections(numTargets)
@@ -44,7 +44,7 @@ public class AttackSelectionProcessor : SelectionProcessor
                 continue;
             }
 
-            space.Occupant.Damage(characterManager.StatsManager.ModifiedValue(CharacterStatType.DAMAGE, damage));
+            space.Occupant.Damage(characterManager.ProfileManager.ModifiedValue(CharacterStatType.DAMAGE, damage));
 
         }
 

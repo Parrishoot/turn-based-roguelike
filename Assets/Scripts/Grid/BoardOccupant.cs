@@ -69,7 +69,7 @@ public abstract class BoardOccupant: MonoBehaviour
         OnSpaceHoverEnd.Process();
     }
 
-    public void Start()
+    protected virtual void Start()
     {
         if(!CharacterTurnType.HasValue) {
             return;

@@ -21,7 +21,7 @@ public class StatusEffectSelectionProcessor : SelectionProcessor
 
     public override SelectionCriteria GetCriteria()
     {
-        int totalRange = characterManager.StatsManager.ModifiedValue(CharacterStatType.RANGE, range);
+        int totalRange = characterManager.ProfileManager.ModifiedValue(CharacterStatType.RANGE, range);
         StatusEffectController controller = statusEffectType.GetController(characterManager);
         CharacterType[] applicableCharacters = controller.Negative ? characterManager.GetCharacterType().GetOpposingCharacterTypes() :
                                                                      characterManager.GetCharacterType().GetAlliedCharacterTypes();

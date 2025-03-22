@@ -1,25 +1,36 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Stats", menuName = "Stats/CharacterStats", order = 1)]
-public class CharacterStats : ScriptableObject
+[System.Serializable]
+public class CharacterStats
 {
-    [field:SerializeReference]
-    public int Health = 5;
-    
-    [field:SerializeReference]
-    public int Shield = 0;
+    public CharacterStats(int health, int shield, int movement, int damage, int range, List<StatusEffectType> immunities)
+    {
+        Health = health;
+        Shield = shield;
+        Movement = movement;
+        Damage = damage;
+        Range = range;
+        Immunities = immunities;
+    }
 
-    [field:SerializeReference]
-    public int Movement = 2;
+    [field: SerializeField]
+    public int Health { get; private set; } = 5;
 
-    [field:SerializeReference]
-    public int Damage = 2;
+    [field: SerializeField]
+    public int Shield { get; private set; } = 0;
 
-    [field:SerializeReference]
-    public int Range = 1;
+    [field: SerializeField]
+    public int Movement { get; private set; } = 2;
 
-    [field:SerializeReference]
-    public List<StatusEffectType> Immunities { get; private set; }
+    [field: SerializeField]
+    public int Damage { get; private set; } = 2;
+
+    [field: SerializeField]
+    public int Range { get; private set; } = 1;
+
+    [field: SerializeField]
+    public List<StatusEffectType> Immunities { get; private set; } = new List<StatusEffectType>();
 
 }

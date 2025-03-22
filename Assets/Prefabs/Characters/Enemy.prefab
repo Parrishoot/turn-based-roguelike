@@ -13,9 +13,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6362830738174737454}
     - target: {fileID: 1875533667796253262, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
+      propertyPath: profile
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f71419fe94c26145a6b93c2013039f3, type: 2}
+    - target: {fileID: 1875533667796253262, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
       propertyPath: characterStats
       value: 
       objectReference: {fileID: 11400000, guid: 0f08485f4f267794d96131e801826d6e, type: 2}
+    - target: {fileID: 1875533667796253262, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
+      propertyPath: <Profile>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f71419fe94c26145a6b93c2013039f3, type: 2}
     - target: {fileID: 3865702178680000563, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -121,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MovementController>k__BackingField: {fileID: 6318952042888598863}
   <HealthController>k__BackingField: {fileID: 678137514499702148}
-  <StatsManager>k__BackingField: {fileID: 8303547255135487145}
+  <ProfileManager>k__BackingField: {fileID: 8303547255135487145}
   <StatusEffectManager>k__BackingField: {fileID: 7381485539289902296}
   characterType: 2
   <AbilityManager>k__BackingField: {fileID: 2185421600557934873}

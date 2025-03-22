@@ -14,7 +14,7 @@ public class StatAdjustAbilityProcessor : ActiveAbilityProcessor
 
     public override void Process()
     {
-        CharacterManager.StatsManager.Stats[statType].AddAdjuster(statAdjuster);
+        CharacterManager.ProfileManager.Stats[statType].AddAdjuster(statAdjuster);
         OnAbilityFinish?.Invoke();
     }
 }

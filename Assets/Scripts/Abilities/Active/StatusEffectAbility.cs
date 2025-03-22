@@ -28,6 +28,6 @@ public class StatusEffectAbility : ActiveAbility
     {
         return new AbilitySelectionCriteria()
             .WithAbilityType(EffectType.GetController(characterManager).Negative ? AbilityType.OFFENSIVE : AbilityType.SUPPORT)
-            .WithRangeToTarget(characterManager.StatsManager.ModifiedValue(CharacterStatType.RANGE, Range));
+            .WithRangeToTarget(characterManager.ProfileManager.ModifiedValue(CharacterStatType.RANGE, Range));
     }
 }

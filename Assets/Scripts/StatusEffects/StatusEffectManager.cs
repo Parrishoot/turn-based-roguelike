@@ -16,7 +16,7 @@ public class StatusEffectManager : MonoBehaviour
     {
         characterManager.OnTurnBegin.OnEvery(ProcessStatusExpiration);
 
-        foreach(StatusEffectType effectType in characterManager.StatsManager.Immunities) {
+        foreach(StatusEffectType effectType in characterManager.ProfileManager.Immunities) {
             CurrentImmunities.Add(effectType);
         }
     }

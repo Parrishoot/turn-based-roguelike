@@ -22,11 +22,11 @@ public class BoostController : StatusEffectController
 
     public override void Apply()
     {
-        CharacterManager.StatsManager.Stats[CharacterStatType.MOVEMENT].AddAdjuster(statAdjuster);
+        CharacterManager.ProfileManager.Stats[CharacterStatType.MOVEMENT].AddAdjuster(statAdjuster);
     }
 
     public override void Remove()
     {
-        CharacterManager.StatsManager.Stats[CharacterStatType.MOVEMENT].RemoveAdjuster(statAdjuster);
+        CharacterManager.ProfileManager.Stats[CharacterStatType.MOVEMENT].RemoveAdjuster(statAdjuster);
     }
 }

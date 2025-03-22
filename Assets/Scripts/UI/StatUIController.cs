@@ -22,6 +22,6 @@ public class StatUIController : MonoBehaviour
     }
 
     void Update() {
-        statValueText.text = characterManager.StatsManager.Stats[statType].CurrentValue.ToString();
+        statValueText.text = characterManager.ProfileManager.Stats[statType].CurrentValue.ToString();
     }
 }
