@@ -34,7 +34,7 @@ public class HealthController : MonoBehaviour
 
     public Action OnDeath { get; set; }
 
-    public void TakeDamage(int damage, bool shieldable=true) {
+    public int TakeDamage(int damage, bool shieldable=true) {
 
         int remainingDamage = damage;
 
@@ -43,7 +43,7 @@ public class HealthController : MonoBehaviour
         }
         
         if(remainingDamage <= 0) {
-            return;
+            return 0;
         }
 
         currentDamage += remainingDamage;
@@ -55,6 +55,7 @@ public class HealthController : MonoBehaviour
             OnDeath?.Invoke();
         }
         
+        return remainingDamage;
     }
 
     public void Heal(int health) {

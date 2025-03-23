@@ -1,53 +1,17 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class AttackSelectionProcessor : SelectionProcessor
+public class AttackSelectionProcessor : EnemyTargetSelectionProcessor
 {
-    private int numTargets = 1;
-
     private int damage = 1;
 
-    private int range = 1;
-
-    private CharacterManager characterManager;
-
-    public AttackSelectionProcessor(CharacterManager characterManager, int numTargets = 1, int damage = 1, int range = 1)
+    public AttackSelectionProcessor(CharacterManager characterManager, int numTargets = 1, int damage = 1, int range = 1): base(characterManager, numTargets, range)
     {
-        this.numTargets = numTargets;
         this.damage = damage;
-        this.range = range;
-        this.characterManager = characterManager;
     }
 
-    public override SelectionCriteria GetCriteria()
+    protected override void ApplyToSelectedSpace(BoardSpace space)
     {
-        int totalRange = characterManager.ProfileManager.ModifiedValue(CharacterStatType.RANGE, range);
-
-        return new SelectionCriteria()
-            .WithMaxSelections(numTargets)
-            .WithFilter(space => {
-                return space.DistanceTo(characterManager.Space, true) <= totalRange &&
-                    space.IsOccupied &&
-                    characterManager.GetCharacterType()
-                                    .GetOpposingCharacterTypes()
-                                    .Contains(space.Occupant.GetCharacterType());
-            });
-    }
-
-    public override void ProcessSelection(List<BoardSpace> selectedSpaces)
-    {
-        foreach(BoardSpace space in selectedSpaces) {
-            
-            if(!space.IsOccupied) {
-                Debug.LogWarning("Unable to damage character on this space - no occupant present");
-                continue;
-            }
-
-            space.Occupant.Damage(characterManager.ProfileManager.ModifiedValue(CharacterStatType.DAMAGE, damage));
-
-        }
-
-        OnSelectionProcessed?.Invoke();
+        int dealtDamage = space.Occupant.Damage(characterManager.ProfileManager.ModifiedValue(CharacterStatType.DAMAGE, damage));
+        characterManager.Events.Attack.Process(new AttackEvent(space.Occupant, dealtDamage));
     }
 }

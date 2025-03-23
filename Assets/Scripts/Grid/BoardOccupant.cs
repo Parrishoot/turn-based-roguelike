@@ -44,8 +44,13 @@ public abstract class BoardOccupant: MonoBehaviour
 
     public virtual TurnType? CharacterTurnType => GetCharacterType().GetDefaultTurnType();
 
-    public virtual void Damage(int damage, bool shieldable=false) {
+    // Returns the amount of actual damage dealt
+    public virtual int Damage(int damage, bool shieldable=false) {
+        return 0;
+    }
 
+    public virtual void Heal(int healAmount) {
+        
     }
 
     public virtual void ApplyStatus(StatusEffectType effectType) {

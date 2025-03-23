@@ -15,6 +15,8 @@ public abstract class CharacterManager : BoardOccupant
 
     public abstract ISelectionController GetAbilitySelectionController(AbilitySelectionCriteria abilitySelectionCriteria);
 
+    public CharacterEvents Events { get; } = new CharacterEvents();
+
     public override ISet<StatusEffectType> Immunities => StatusEffectManager.CurrentImmunities;
 
     protected override void Start() {
@@ -22,9 +24,18 @@ public abstract class CharacterManager : BoardOccupant
         CharacterPanelManager.Instance.AddCharacterAttributePanel(this);
     }
 
-    public override void Damage(int damage, bool shieldable=false)
+    public override int Damage(int damage, bool shieldable=false)
     {
-        HealthController?.TakeDamage(damage);
+        if(HealthController == null) {
+            return 0;
+        }
+
+        return HealthController.TakeDamage(damage);
+    }
+
+    public override void Heal(int healAmount)
+    {
+        HealthController?.Heal(healAmount);
     }
 
     public override void ApplyStatus(StatusEffectType effectType)

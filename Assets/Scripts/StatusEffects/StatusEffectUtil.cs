@@ -6,6 +6,7 @@ public static class StatusEffectUtil
             StatusEffectType.SHOCKWAVE => new ShockwaveController(characterManager),
             StatusEffectType.BLEED => new BleedController(characterManager),
             StatusEffectType.BOOST => new BoostController(characterManager),
+            StatusEffectType.SIPHON => new SiphonController(characterManager),
             _ => throw new System.NotImplementedException(),
         };
     }
