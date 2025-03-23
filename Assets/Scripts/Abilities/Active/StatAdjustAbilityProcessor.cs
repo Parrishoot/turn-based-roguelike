@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class StatAdjustAbilityProcessor : ActiveAbilityProcessor
 {
-    private StatAdjuster statAdjuster;
+    private ValueAdjuster statAdjuster;
 
     private CharacterStatType statType;
 
-    public StatAdjustAbilityProcessor(CharacterManager characterManager, CharacterStatType statType, StatAdjuster statAdjuster) : base(characterManager)
+    public StatAdjustAbilityProcessor(CharacterManager characterManager, CharacterStatType statType, ValueAdjuster statAdjuster) : base(characterManager)
     {
         this.statAdjuster = statAdjuster;
         this.statType = statType;
@@ -14,7 +14,7 @@ public class StatAdjustAbilityProcessor : ActiveAbilityProcessor
 
     public override void Process()
     {
-        CharacterManager.ProfileManager.Stats[statType].AddAdjuster(statAdjuster);
+        CharacterManager.ProfileManager.Stats[statType].Modifier.AddAdjuster(statAdjuster);
         OnAbilityFinish?.Invoke();
     }
 }

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2d7ff0ebfcf98942b8db1324b7407e6, type: 3}
-  m_Name: Recharge
+  m_Name: PatchUp_Card
   m_EditorClassIdentifier: 
-  <CardName>k__BackingField: Recharge
-  <BaseCost>k__BackingField: 10
-  <Active>k__BackingField: {fileID: 11400000, guid: f9872f1097b5f7a4dbec817e5e978be4, type: 2}
-  <Passive>k__BackingField: {fileID: 11400000, guid: eafe2fe016622044bab4e5368b735db2, type: 2}
+  <CardName>k__BackingField: Patch Up
+  <BaseCost>k__BackingField: 3
+  <Active>k__BackingField: {fileID: 11400000, guid: c52b0bb86bf33ea49892525e66ea1d3f, type: 2}
+  <Passive>k__BackingField: {fileID: 11400000, guid: ae15af304c4b58c49abbb0916f2ed81d, type: 2}
   <CharacterClasses>k__BackingField: 

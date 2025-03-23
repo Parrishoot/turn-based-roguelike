@@ -5,6 +5,6 @@ public class PlayerStatChangePassiveAbility : StatChangePassive<PlayerStatType>
 {
     protected override StatChangePassiveController<PlayerStatType> GetStatPassiveController()
     {
-        return new PlayerStatChangePassiveController(StatType, new StatAdjuster(Amount, StatAdjustType));
+        return new PlayerStatChangePassiveController(StatType, new ValueAdjuster(Amount, StatAdjustType));
     }
 }

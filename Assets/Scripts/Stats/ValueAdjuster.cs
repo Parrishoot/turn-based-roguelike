@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 // TODO: ADD MULTS HERE
-public class StatAdjuster: IComparable
+public class ValueAdjuster: IComparable
 {
     public enum Type {
         ADD,
@@ -13,7 +13,7 @@ public class StatAdjuster: IComparable
 
     public int AdjustmentValue { get; private set; } = 1;
 
-    public StatAdjuster(int adjustmentValue, Type adjustmentType=Type.ADD)
+    public ValueAdjuster(int adjustmentValue, Type adjustmentType=Type.ADD)
     {
         this.AdjustmentType = adjustmentType;
         this.AdjustmentValue = adjustmentValue;
@@ -29,7 +29,7 @@ public class StatAdjuster: IComparable
 
     public int CompareTo(object obj)
     {
-        StatAdjuster other = (StatAdjuster) obj;
+        ValueAdjuster other = (ValueAdjuster) obj;
 
         if(AdjustmentType == Type.ADD && other.AdjustmentType == Type.MULT) {
             return -1;

@@ -5,11 +5,11 @@ using UnityEngine;
 /// </summary>
 public class BoostController : StatusEffectController
 {
-    private StatAdjuster statAdjuster;
+    private ValueAdjuster statAdjuster;
 
     public BoostController(CharacterManager characterManager) : base(characterManager)
     {
-        statAdjuster = new StatAdjuster(2, StatAdjuster.Type.MULT);
+        statAdjuster = new ValueAdjuster(2, ValueAdjuster.Type.MULT);
     }
 
     public override StatusEffectType EffectType => StatusEffectType.BOOST;
@@ -22,11 +22,11 @@ public class BoostController : StatusEffectController
 
     public override void Apply()
     {
-        CharacterManager.ProfileManager.Stats[CharacterStatType.MOVEMENT].AddAdjuster(statAdjuster);
+        CharacterManager.ProfileManager.Stats[CharacterStatType.MOVEMENT].Modifier.AddAdjuster(statAdjuster);
     }
 
     public override void Remove()
     {
-        CharacterManager.ProfileManager.Stats[CharacterStatType.MOVEMENT].RemoveAdjuster(statAdjuster);
+        CharacterManager.ProfileManager.Stats[CharacterStatType.MOVEMENT].Modifier.RemoveAdjuster(statAdjuster);
     }
 }

@@ -7,7 +7,7 @@ public class CharacterStatChangePassiveController : StatChangePassiveController<
     
     private IEventHandler<CharacterManager> characterSpawnedHandler;
 
-    public CharacterStatChangePassiveController(CharacterStatType statType, StatAdjuster statAdjuster): base(statType, statAdjuster)
+    public CharacterStatChangePassiveController(CharacterStatType statType, ValueAdjuster statAdjuster): base(statType, statAdjuster)
     {
 
     }
@@ -21,7 +21,7 @@ public class CharacterStatChangePassiveController : StatChangePassiveController<
 
     protected override void ProcessActivation()
     {
-        characterSpawnedHandler = new EveryEventHandler<CharacterManager>((manager) => manager.ProfileManager.Stats[statType].AddAdjuster(statAdjuster));
+        characterSpawnedHandler = new EveryEventHandler<CharacterManager>((manager) => manager.ProfileManager.Stats[statType].Modifier.AddAdjuster(statAdjuster));
         SpawnManager.Instance.CharacterSpawned.SubscribeHandler(characterSpawnedHandler);
 
         base.ProcessActivation();

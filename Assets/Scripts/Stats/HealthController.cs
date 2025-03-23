@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthController : MonoBehaviour
@@ -34,12 +35,16 @@ public class HealthController : MonoBehaviour
 
     public Action OnDeath { get; set; }
 
+    public Modifier HealModifier = new Modifier();
+
+    public Modifier DamageModifier = new Modifier();
+
     public int TakeDamage(int damage, bool shieldable=true) {
 
-        int remainingDamage = damage;
+        int remainingDamage = DamageModifier.GetModifiedValue(damage);
 
         if(shieldable) {
-            remainingDamage = ProcessShield(damage);
+            remainingDamage = ProcessShield(remainingDamage);
         }
         
         if(remainingDamage <= 0) {
@@ -59,6 +64,9 @@ public class HealthController : MonoBehaviour
     }
 
     public void Heal(int health) {
+
+        health = HealModifier.GetModifiedValue(health);
+
         currentDamage = Math.Max(0, currentDamage - health);
         OnHeal?.Invoke(health);
     }

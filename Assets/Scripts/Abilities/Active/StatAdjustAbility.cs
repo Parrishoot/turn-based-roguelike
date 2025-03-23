@@ -7,7 +7,7 @@ public class StatAdjustAbility : ActiveAbility
     private CharacterStatType statType;
 
     [SerializeField]
-    private StatAdjuster.Type statAdjusterType = StatAdjuster.Type.ADD;
+    private ValueAdjuster.Type statAdjusterType = ValueAdjuster.Type.ADD;
 
     [SerializeField]
     private int adjustmentValue = 1;
@@ -19,7 +19,7 @@ public class StatAdjustAbility : ActiveAbility
 
     public override ActiveAbilityProcessor GetAbilityProcessor(CharacterManager characterManager)
     {
-        return new StatAdjustAbilityProcessor(characterManager, statType, new StatAdjuster(adjustmentValue, statAdjusterType));
+        return new StatAdjustAbilityProcessor(characterManager, statType, new ValueAdjuster(adjustmentValue, statAdjusterType));
     }
 
     public override AbilitySelectionCriteria GetDefaultAbilitySelectionCriteria(CharacterManager characterManager)

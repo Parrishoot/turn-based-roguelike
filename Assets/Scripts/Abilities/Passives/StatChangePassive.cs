@@ -7,7 +7,7 @@ where T: System.Enum
     public T StatType { get; private set; }
 
     [field:SerializeReference]
-    public StatAdjuster.Type StatAdjustType { get; private set; } = StatAdjuster.Type.ADD;
+    public ValueAdjuster.Type StatAdjustType { get; private set; } = ValueAdjuster.Type.ADD;
 
     [field:SerializeReference]
     public int Amount { get; private set; }

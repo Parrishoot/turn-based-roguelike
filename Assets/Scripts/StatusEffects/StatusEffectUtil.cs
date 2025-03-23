@@ -7,6 +7,7 @@ public static class StatusEffectUtil
             StatusEffectType.BLEED => new BleedController(characterManager),
             StatusEffectType.BOOST => new BoostController(characterManager),
             StatusEffectType.SIPHON => new SiphonController(characterManager),
+            StatusEffectType.CURSE => new CurseController(characterManager),
             _ => throw new System.NotImplementedException(),
         };
     }

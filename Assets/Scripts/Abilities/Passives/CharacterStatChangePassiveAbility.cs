@@ -5,6 +5,6 @@ public class CharacterStatChangePassiveAbility : StatChangePassive<CharacterStat
 {
     protected override StatChangePassiveController<CharacterStatType> GetStatPassiveController()
     {
-        return new CharacterStatChangePassiveController(StatType, new StatAdjuster(Amount, StatAdjustType));
+        return new CharacterStatChangePassiveController(StatType, new ValueAdjuster(Amount, StatAdjustType));
     }
 }

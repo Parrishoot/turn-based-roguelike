@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class PlayerStatChangePassiveController : StatChangePassiveController<PlayerStatType>
 {
-    public PlayerStatChangePassiveController(PlayerStatType statType, StatAdjuster statAdjuster) : base(statType, statAdjuster)
+    public PlayerStatChangePassiveController(PlayerStatType statType, ValueAdjuster statAdjuster) : base(statType, statAdjuster)
     {
     }
 

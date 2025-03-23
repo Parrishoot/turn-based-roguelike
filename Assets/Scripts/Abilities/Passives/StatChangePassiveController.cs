@@ -6,10 +6,10 @@ where T: System.Enum
 {
     protected T statType;
 
-    protected StatAdjuster statAdjuster;
+    protected ValueAdjuster statAdjuster;
 
 
-    public StatChangePassiveController(T statType, StatAdjuster statAdjuster)
+    public StatChangePassiveController(T statType, ValueAdjuster statAdjuster)
     {
         this.statType = statType;
         this.statAdjuster = statAdjuster;
@@ -20,14 +20,14 @@ where T: System.Enum
     protected override void ProcessDeactivation()
     {
         foreach(StatsManager<T> manager in GetStatsManagers()) {
-            manager.Stats[statType].RemoveAdjuster(statAdjuster);
+            manager.Stats[statType].Modifier.RemoveAdjuster(statAdjuster);
         }
     }
 
     protected override void ProcessActivation()
     {
         foreach(StatsManager<T> manager in GetStatsManagers()) {
-            manager.Stats[statType].AddAdjuster(statAdjuster);
+            manager.Stats[statType].Modifier.AddAdjuster(statAdjuster);
         }
     }
 }

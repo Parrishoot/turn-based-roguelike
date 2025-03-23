@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using com.cyborgAssets.inspectorButtonPro;
 using UnityEngine;
 
 public class StatusEffectManager : MonoBehaviour
@@ -41,6 +42,7 @@ public class StatusEffectManager : MonoBehaviour
         RemoveUIPanel(statusEffectController);
     }
 
+    [ProButton]
     public void Remove(StatusEffectType statusEffectType) {
 
         StatusEffectController statusEffectController = statusEffects.Where(x => x.EffectType == statusEffectType).First();
@@ -63,6 +65,7 @@ public class StatusEffectManager : MonoBehaviour
         uiPanels.Remove(controller);
     }
 
+    [ProButton]
     public void Apply(StatusEffectType statusEffectType) {
 
         // Return if Immune

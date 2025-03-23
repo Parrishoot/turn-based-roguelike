@@ -6,7 +6,7 @@ public class AdjustableStat
 {
     private int baseValue;
 
-    public List<StatAdjuster> Adjusters { get; private set; } = new List<StatAdjuster>();
+    public Modifier Modifier { get; private set; } = new Modifier();
 
     public AdjustableStat(int baseValue)
     {
@@ -16,22 +16,7 @@ public class AdjustableStat
     public int CurrentValue {
 
         get {
-            int val = baseValue;
-
-            foreach(StatAdjuster adjuster in Adjusters) {
-                val = adjuster.Adjust(val);
-            }
-
-            return val;
+            return Modifier.GetModifiedValue(baseValue);
         }
-    }
-
-    public void AddAdjuster(StatAdjuster adjuster) {
-        Adjusters.Add(adjuster);
-        Adjusters.Sort();
-    }
-
-    public void RemoveAdjuster(StatAdjuster adjuster) {
-        Adjusters.Remove(adjuster);
     }
 }
