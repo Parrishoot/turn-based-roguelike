@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 1102069290117108287, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
       propertyPath: characterManager
       value: 
-      objectReference: {fileID: 6362830738174737454}
+      objectReference: {fileID: 2988960201523775955}
     - target: {fileID: 1875533667796253262, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
       propertyPath: profile
       value: 
@@ -31,19 +31,15 @@ PrefabInstance:
     - target: {fileID: 4506544893851085736, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
       propertyPath: <CharacterManager>k__BackingField
       value: 
-      objectReference: {fileID: 6362830738174737454}
+      objectReference: {fileID: 2988960201523775955}
     - target: {fileID: 5783838896988898380, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 6167755084179978192, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
-      propertyPath: characterManager
-      value: 
-      objectReference: {fileID: 6362830738174737454}
     - target: {fileID: 6940646993716593507, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
       propertyPath: characterManager
       value: 
-      objectReference: {fileID: 6362830738174737454}
+      objectReference: {fileID: 2988960201523775955}
     - target: {fileID: 8545387793827198001, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -84,17 +80,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8905851636276154034, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
-      propertyPath: characterManager
-      value: 
-      objectReference: {fileID: 6362830738174737454}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5783838896988898380, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
       insertIndex: 1
-      addedObject: {fileID: 6362830738174737454}
+      addedObject: {fileID: 2988960201523775955}
     - targetCorrespondingSourceObject: {fileID: 5783838896988898380, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2185421600557934873}
@@ -115,7 +107,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5783838896988898380, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
   m_PrefabInstance: {fileID: 7582684991050661607}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6362830738174737454
+--- !u!114 &2988960201523775955
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,15 +116,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4143110473302080171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c01559314edd6d845afc4f707336e29b, type: 3}
+  m_Script: {fileID: 11500000, guid: d930b524a92f1db4085936fd76f54c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <MovementController>k__BackingField: {fileID: 6318952042888598863}
   <HealthController>k__BackingField: {fileID: 678137514499702148}
   <ProfileManager>k__BackingField: {fileID: 8303547255135487145}
   <StatusEffectManager>k__BackingField: {fileID: 7381485539289902296}
-  characterType: 2
   <AbilityManager>k__BackingField: {fileID: 2185421600557934873}
+  <Class>k__BackingField: 0
 --- !u!114 &2185421600557934873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e0e8c997679054db0227f99e71a302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterManager: {fileID: 6362830738174737454}
+  characterManager: {fileID: 2988960201523775955}
   abilities:
   - {fileID: 11400000, guid: 1043e2ed574ef1242860d6f0c3b40529, type: 2}
 --- !u!114 &6318952042888598863 stripped

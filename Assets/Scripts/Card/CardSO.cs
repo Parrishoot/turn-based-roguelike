@@ -17,7 +17,7 @@ public class CardSO : ScriptableObject
     public PassiveAbility Passive { get; private set; }
 
     [field:SerializeReference]
-    public List<CharacterClass> CharacterClasses { get; private set; }
+    public List<PlayerClass> CharacterClasses { get; private set; }
 
     public Card GetCard() {
         return new Card(CardName, BaseCost, Active, Passive, CharacterClasses);

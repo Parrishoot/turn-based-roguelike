@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Card
 {
-    public Card(string cardName, int baseCost, ActiveAbility active, PassiveAbility passive, List<CharacterClass> characterClasses)
+    public Card(string cardName, int baseCost, ActiveAbility active, PassiveAbility passive, List<PlayerClass> characterClasses)
     {
         CardName = cardName;
         BaseCost = baseCost;
@@ -20,13 +20,13 @@ public class Card
 
     public PassiveAbility Passive { get; private set; }
 
-    public List<CharacterClass> CharacterClasses{ get; private set; }
+    public List<PlayerClass> CharacterClasses{ get; private set; }
 
-    public bool CanPlayOnCharacter(CharacterClass characterClass) {
+    public bool CanPlayOnCharacter(PlayerClass characterClass) {
 
         // If none are supplied - assume all but Totem are allowed
         if(CharacterClasses.Count == 0) {
-            return characterClass != CharacterClass.TOTEM;
+            return characterClass != PlayerClass.TOTEM;
         }
 
         return CharacterClasses.Contains(characterClass);

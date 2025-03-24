@@ -14,7 +14,8 @@ public class SpawnSelectionProcessor : SelectionProcessor
     public override void ProcessSelection(List<BoardSpace> selectedSpaces)
     {
         foreach (BoardSpace space in selectedSpaces) {
-            SpawnManager.Instance.SpawnAtSpace(space);
+            // TODO: Set this to the right character class
+            SpawnManager.Instance.SpawnPlayerCharacter(PlayerClass.MAGE, space);
         }
     }
 }
