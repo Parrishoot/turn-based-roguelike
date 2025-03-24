@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using com.cyborgAssets.inspectorButtonPro;
 using UnityEngine;
 
@@ -11,8 +12,32 @@ public class SpawnManager : Singleton<SpawnManager>
     public EventProcessor<PlayerCharacterManager> PlayerCharacterSpawned { get; private set; } = new EventProcessor<PlayerCharacterManager>();
 
     public EventProcessor<EnemyCharacterManager> EnemyCharacterSpawned { get; private set; } = new EventProcessor<EnemyCharacterManager>();
-
     private CharacterAddressablePrefabSpawner spawner = new CharacterAddressablePrefabSpawner();
+
+    public List<PlayerCharacterManager> PlayerCharacters { get; private set; } = new List<PlayerCharacterManager>();
+
+    public List<EnemyCharacterManager> EnemyCharacters { get; private set; } = new List<EnemyCharacterManager>();
+
+    void Start()
+    {
+        foreach(PlayerCharacterManager manager in GameObject.FindObjectsByType<PlayerCharacterManager>(FindObjectsSortMode.None)) {
+            PlayerCharacters.Add(manager);
+        }
+
+        foreach(EnemyCharacterManager manager in GameObject.FindObjectsByType<EnemyCharacterManager>(FindObjectsSortMode.None)) {
+            EnemyCharacters.Add(manager);
+        }
+    }
+
+    public List<CharacterManager> AllCharacters {
+        get {
+            List<CharacterManager> characters = new List<CharacterManager>();
+            characters.AddRange(PlayerCharacters);
+            characters.AddRange(EnemyCharacters);
+
+            return characters;
+        }
+    }
 
     public void SpawnPlayerCharacter(PlayerClass playerClass, BoardSpace space) {
         
@@ -25,7 +50,10 @@ public class SpawnManager : Singleton<SpawnManager>
             PlayerCharacterManager playerCharacterManager = spawnedObject.GetComponent<PlayerCharacterManager>();
             space.Occupant = playerCharacterManager;
 
+            PlayerCharacters.Add(playerCharacterManager);
+
             PlayerCharacterSpawned.Process(playerCharacterManager);
+            CharacterSpawned.Process(playerCharacterManager);
         });
     }
 
@@ -40,7 +68,10 @@ public class SpawnManager : Singleton<SpawnManager>
             EnemyCharacterManager enemyCharacterManager = spawnedObject.GetComponent<EnemyCharacterManager>();
             space.Occupant = enemyCharacterManager;
 
+            EnemyCharacters.Add(enemyCharacterManager);
+            
             EnemyCharacterSpawned.Process(enemyCharacterManager);
+            CharacterSpawned.Process(enemyCharacterManager);
         });
     }
 

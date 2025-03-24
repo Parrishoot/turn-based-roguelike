@@ -2352,7 +2352,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5863114017965164016, guid: 4ef09d3745bb0b24f9616c8307036a73, type: 3}
       propertyPath: <Class>k__BackingField
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1970874025667788768, guid: 4ef09d3745bb0b24f9616c8307036a73, type: 3}
       propertyPath: m_Name
@@ -4145,7 +4145,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1626905026}
   - component: {fileID: 1626905027}
-  - component: {fileID: 1626905028}
   m_Layer: 0
   m_Name: Spawns
   m_TagString: Untagged
@@ -4180,20 +4179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d1f63bf383daa40ad305d47f1d2ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCharacterPrefab: {fileID: 1970874025667788768, guid: 4ef09d3745bb0b24f9616c8307036a73, type: 3}
   occupantTransform: {fileID: 1153041809}
---- !u!114 &1626905028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1626905025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56d48bfff3d8a46488b5c1635f6297d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1705623243
 GameObject:
   m_ObjectHideFlags: 0

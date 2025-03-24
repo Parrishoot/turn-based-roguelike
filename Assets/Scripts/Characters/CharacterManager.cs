@@ -42,4 +42,9 @@ public abstract class CharacterManager : BoardOccupant
     {
         StatusEffectManager.Apply(effectType);
     }
+
+    public void RemoveStatus(StatusEffectType effectType)
+    {
+        StatusEffectManager.Remove(effectType);
+    }
 }
