@@ -13,6 +13,8 @@ public class PushSelectionProcessor : SelectionProcessor
 
     private int remainingPushes = 0;
 
+    private List<BoardSpace> characterDestinations = new List<BoardSpace>();
+
     public PushSelectionProcessor(CharacterManager characterManager, int numTargets, int range)
     {
         this.characterManager = characterManager;
@@ -33,6 +35,8 @@ public class PushSelectionProcessor : SelectionProcessor
 
     public override void ProcessSelection(List<BoardSpace> selectedSpaces)
     {
+
+        List<BoardSpace> characterSpaces = new List<BoardSpace>();
 
         foreach(BoardSpace space in selectedSpaces) {
 
@@ -58,22 +62,25 @@ public class PushSelectionProcessor : SelectionProcessor
             Path path = Path.Make(pathSpaces);
 
             remainingPushes++;
-            space.Occupant.MovementController.OnMovementFinished.OnNext(PushFinished);
+            space.Occupant.MovementController.OnMovementFinished.OnNext(() => PushFinished(space.Occupant));
             space.Occupant.Move(path);
+
+            characterSpaces.Add(path.Destination);
         }
 
         if(remainingPushes == 0) {
-            OnSelectionProcessed?.Invoke();
+            OnSelectionProcessed?.Invoke(characterSpaces);
         }
 
     }
 
-    private void PushFinished() {
+    private void PushFinished(BoardOccupant boardOccupant) {
         
         remainingPushes--;
+        characterDestinations.Add(boardOccupant.Space);
         
         if(remainingPushes <= 0) {
-            OnSelectionProcessed?.Invoke();
+            OnSelectionProcessed?.Invoke(characterDestinations);
         }
     }
 }

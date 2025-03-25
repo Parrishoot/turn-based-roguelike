@@ -6,12 +6,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CompoundAbility", menuName = "Abilities/Active/CompoundAbility", order = 1)]
 public class CompoundAbility : ActiveAbility
 {
-    [field:SerializeReference]
-    public List<ActiveAbility> Abilites { get; private set; }
+    [field: SerializeField]
+    public List<CompoundAbilityNode> Abilites { get; private set; } = new List<CompoundAbilityNode>();
 
     public override string GetAbilityDescription()
     {
-        return string.Join(", then ", Abilites.Select(x => x.GetAbilityDescription()));
+        return string.Join(", then ", Abilites.Select(x => x.Ability.GetAbilityDescription()));
     }
 
     public override AbilitySelectionCriteria GetDefaultAbilitySelectionCriteria(CharacterManager characterManager)
@@ -19,7 +19,7 @@ public class CompoundAbility : ActiveAbility
         AbilitySelectionCriteria abilitySelectionCriteria = new AbilitySelectionCriteria()
             .WithAbilityType(AbilityType.SUPPORT);
 
-        foreach (ActiveAbility ability in Abilites) {
+        foreach (ActiveAbility ability in Abilites.Select(x => x.Ability)) {
 
             switch (ability.GetDefaultAbilitySelectionCriteria(characterManager).CurrentAbilityType) {
                 

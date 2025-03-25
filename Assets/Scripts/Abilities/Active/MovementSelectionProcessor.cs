@@ -35,8 +35,10 @@ public class MovementSelectionProcessor : SelectionProcessor
 
     public override void ProcessSelection(List<BoardSpace> selectedSpaces)
     {
+
+
         if(selectedSpaces.Count <= 0) {
-            OnSelectionProcessed?.Invoke();
+            OnSelectionProcessed?.Invoke(new List<BoardSpace>());
             return;
         }
 
@@ -45,7 +47,9 @@ public class MovementSelectionProcessor : SelectionProcessor
         int totalRange = characterManager.ProfileManager.ModifiedValue(CharacterStatType.MOVEMENT, range);
         Path path = PathFinder.FindPath(BoardManager.Instance.Board, characterManager.Space, targetSpace, totalRange);
 
-        characterManager.MovementController.OnMovementFinished.OnNext(() => OnSelectionProcessed?.Invoke());
+        characterManager.MovementController.OnMovementFinished.OnNext(() => {
+            OnSelectionProcessed?.Invoke(new List<BoardSpace>() { characterManager.Space });
+        });
         characterManager.MovementController.MoveAlongPath(path);
     }
 }

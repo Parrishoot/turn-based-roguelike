@@ -34,6 +34,8 @@ public abstract class AllyTargetSelectionProcessor : SelectionProcessor
 
     public override void ProcessSelection(List<BoardSpace> selectedSpaces)
     {
+        List<BoardSpace> affectedSpaces = new List<BoardSpace>();
+
         foreach(BoardSpace space in selectedSpaces) {
 
             if(!space.IsOccupied) {
@@ -42,9 +44,10 @@ public abstract class AllyTargetSelectionProcessor : SelectionProcessor
             }
 
             ApplyToSelectedSpace(space);
+            affectedSpaces.Add(space);
         }
 
-        OnSelectionProcessed?.Invoke();
+        OnSelectionProcessed?.Invoke(affectedSpaces);
     }
 
     protected abstract void ApplyToSelectedSpace(BoardSpace space);

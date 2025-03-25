@@ -12,7 +12,16 @@ public class SelectionAbilityProcessor : ActiveAbilityProcessor
 
     public override void Process()
     {
-        abilitySelectionProcessor.OnSelectionProcessed += () => OnAbilityFinish?.Invoke();
-        abilitySelectionController.BeginSelection(abilitySelectionProcessor);
+        abilitySelectionProcessor.OnSelectionProcessed += (spaces) => {
+            AffectedSpaces = spaces;
+            OnAbilityFinish?.Invoke();
+        };
+
+        if(PredeterminedSpaces != null) {
+            abilitySelectionProcessor.ProcessSelection(PredeterminedSpaces);
+        }
+        else {
+            abilitySelectionController.BeginSelection(abilitySelectionProcessor);
+        }
     }
 }

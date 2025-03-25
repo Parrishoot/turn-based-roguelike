@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b6c77315f9ec51439d4ad36728f01b1, type: 3}
-  m_Name: Enemy_Basic
+  m_Name: SoulLink_Active
   m_EditorClassIdentifier: 
   <Abilites>k__BackingField:
-  - <Ability>k__BackingField: {fileID: 11400000, guid: 335c204d2bb6a614cb57181e21f958f0, type: 2}
+  - <Ability>k__BackingField: {fileID: 11400000, guid: b7ac0c8453579b84e82416a4747000fb, type: 2}
     <Chain>k__BackingField: 0
-  - <Ability>k__BackingField: {fileID: 11400000, guid: 330fb55bb7d643f49a6836114219a192, type: 2}
-    <Chain>k__BackingField: 0
+  - <Ability>k__BackingField: {fileID: 11400000, guid: 3984b7b2e98eb2c4ba38e4e72c77df84, type: 2}
+    <Chain>k__BackingField: 1

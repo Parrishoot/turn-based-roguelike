@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b6c77315f9ec51439d4ad36728f01b1, type: 3}
   m_Name: Active_TheBasics
   m_EditorClassIdentifier: 
-  <AbilityName>k__BackingField: The Basics
   <Abilites>k__BackingField:
-  - {fileID: 11400000, guid: 1043e2ed574ef1242860d6f0c3b40529, type: 2}
-  - {fileID: 11400000, guid: 5c22f6c3504b99d45b3d14af5b71308b, type: 2}
+  - <Ability>k__BackingField: {fileID: 11400000, guid: 1043e2ed574ef1242860d6f0c3b40529, type: 2}
+    <Chain>k__BackingField: 0
+  - <Ability>k__BackingField: {fileID: 11400000, guid: 5c22f6c3504b99d45b3d14af5b71308b, type: 2}
+    <Chain>k__BackingField: 0

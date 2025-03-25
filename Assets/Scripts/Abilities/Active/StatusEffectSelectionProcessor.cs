@@ -42,5 +42,7 @@ public class StatusEffectSelectionProcessor : SelectionProcessor
         foreach(BoardSpace space in selectedSpaces) {
             space.Occupant.ApplyStatus(statusEffectType);
         }
+
+        OnSelectionProcessed?.Invoke(selectedSpaces);
     }
 }

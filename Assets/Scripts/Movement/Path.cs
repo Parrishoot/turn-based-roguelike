@@ -11,6 +11,14 @@ namespace Pathfinding {
 
         public Queue<BoardSpace> Spaces { get; private set; }
 
+        private BoardSpace destination;
+
+        public BoardSpace Destination {
+            get {
+                return destination;
+            }
+        }
+
         private bool valid = true;
 
         public Path(List<PathNode> pathNodes, int maxDistance = NO_MAX) {
@@ -20,6 +28,8 @@ namespace Pathfinding {
                 return;
             }
             
+            destination = pathNodes.Count == 0 ? null : pathNodes.Select(x => x.Space).Last();
+
             Spaces = new Queue<BoardSpace>(pathNodes.Select(x => x.Space).ToList());
             valid = maxDistance == NO_MAX || Spaces.Count <= maxDistance + 1;
 
