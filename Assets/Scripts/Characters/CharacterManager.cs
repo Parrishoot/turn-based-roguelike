@@ -22,6 +22,10 @@ public abstract class CharacterManager : BoardOccupant
     protected override void Start() {
         base.Start();
         CharacterPanelManager.Instance.AddCharacterAttributePanel(this);
+
+        if(HealthController != null) {
+            HealthController.OnDeath += Events.Death.Process;
+        }
     }
 
     public override int Damage(int damage, bool shieldable=false)

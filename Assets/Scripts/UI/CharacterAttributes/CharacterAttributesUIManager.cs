@@ -34,6 +34,9 @@ public class CharacterAttributeUIManager : MonoBehaviour, IPointerEnterHandler, 
     public void Init(CharacterManager characterManager) {
         
         CharacterManager = characterManager;
+        CharacterManager.Events.Death.OnNext(() => {
+            Destroy(gameObject);
+        });
 
         characterNameText.text = characterManager.ProfileManager.Profile.CharacterName;
         healthbarUIController.Init(characterManager);

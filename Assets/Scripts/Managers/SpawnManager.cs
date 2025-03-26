@@ -22,10 +22,16 @@ public class SpawnManager : Singleton<SpawnManager>
     {
         foreach(PlayerCharacterManager manager in GameObject.FindObjectsByType<PlayerCharacterManager>(FindObjectsSortMode.None)) {
             PlayerCharacters.Add(manager);
+            manager.Events.Death.OnNext(() => {
+                PlayerCharacters.Remove(manager);
+            });
         }
 
         foreach(EnemyCharacterManager manager in GameObject.FindObjectsByType<EnemyCharacterManager>(FindObjectsSortMode.None)) {
             EnemyCharacters.Add(manager);
+            manager.Events.Death.OnNext(() => {
+                EnemyCharacters.Remove(manager);
+            });
         }
     }
 
@@ -51,6 +57,9 @@ public class SpawnManager : Singleton<SpawnManager>
             space.Occupant = playerCharacterManager;
 
             PlayerCharacters.Add(playerCharacterManager);
+            playerCharacterManager.Events.Death.OnNext(() => {
+                PlayerCharacters.Remove(playerCharacterManager);
+            });
 
             PlayerCharacterSpawned.Process(playerCharacterManager);
             CharacterSpawned.Process(playerCharacterManager);
@@ -69,6 +78,9 @@ public class SpawnManager : Singleton<SpawnManager>
             space.Occupant = enemyCharacterManager;
 
             EnemyCharacters.Add(enemyCharacterManager);
+            enemyCharacterManager.Events.Death.OnNext(() => {
+                EnemyCharacters.Remove(enemyCharacterManager);
+            });
             
             EnemyCharacterSpawned.Process(enemyCharacterManager);
             CharacterSpawned.Process(enemyCharacterManager);

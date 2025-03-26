@@ -29,7 +29,7 @@ public class SiphonController : StatusEffectController
     }
 
     private void Process(AttackEvent attackEvent) {
-        int healAmount = (int) ((double) attackEvent.Damage / 2);
+        int healAmount = (int) Mathf.Ceil((float) attackEvent.Damage / 2);
         CharacterManager.HealthController.Heal(healAmount);
     }
 }

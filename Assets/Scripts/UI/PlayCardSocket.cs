@@ -14,6 +14,9 @@ public class PlayCardSocket : CardDraggableSocket
 
     public void Init(PlayerCharacterManager playerCharacterManager) {
         this.playerCharacterManager = playerCharacterManager;
+        playerCharacterManager.Events.Death.OnNext(() => {
+            Destroy(gameObject);
+        });
     }
 
     public override bool CanProcessCard(Card card)
