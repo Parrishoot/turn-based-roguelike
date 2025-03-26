@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Net.Sockets;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -214,6 +215,20 @@ public class CardUIController : Draggable, IPointerClickHandler
         base.EndDrag();
     }
 
+    protected override void SetPosition(PointerEventData eventData)
+    {
+        if(!IsDragging) {
+            return;
+        }
+
+        if(currentSocket != null) {
+            draggableTransformOverride.position = new Vector3(currentSocket.transform.position.x, currentSocket.transform.position.y, 0);
+            return;
+        }
+
+        base.SetPosition(eventData);
+    }
+
     private void ProcessSocketExited() {
         currentSocket = null;
         Grow();
@@ -226,7 +241,6 @@ public class CardUIController : Draggable, IPointerClickHandler
         }
 
         currentSocket = socket;
-        transform.position = screenPosition;
         Shrink();
     }
 

@@ -7,7 +7,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private bool resetOnDragEnd = true;
 
     [SerializeField]
-    private Transform draggableTransformOverride;
+    protected Transform draggableTransformOverride;
 
     public EventProcessor OnDragBegin { get; private set; } = new EventProcessor();
 
