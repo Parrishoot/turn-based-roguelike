@@ -20,7 +20,7 @@ where T: CharacterManager
     protected override void ProcessActivation() {
 
         foreach(T characterManager in GetSpawnedCharacters()) {
-            ProcessApplication(characterManager);
+            CheckApply(characterManager);
         }
         
         GetSpawnedEventProcessor().SubscribeHandler(characterSpawnedHandler);
@@ -29,7 +29,7 @@ where T: CharacterManager
     protected override void ProcessDeactivation() {
 
         foreach(T characterManager in GetSpawnedCharacters()) {
-            ProcessApplication(characterManager);
+            CheckRemove(characterManager);
         }
         
         GetSpawnedEventProcessor().UnsubscribeHandler(characterSpawnedHandler);
