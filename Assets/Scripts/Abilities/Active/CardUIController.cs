@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CardUIController : Draggable, IPointerClickHandler
+public class CardUIController : Draggable, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private const float IDLE_ROTATE_AMOUNT = 2f; 
     private const float IDLE_ANIMATION_TIME = 2f;
@@ -36,6 +36,8 @@ public class CardUIController : Draggable, IPointerClickHandler
     private CardDraggableSocket currentSocket = null;
 
     private bool frontShowing = true;
+
+    private int prevIndex = 0;
 
     public void Setup(Card card)
     {
@@ -187,7 +189,7 @@ public class CardUIController : Draggable, IPointerClickHandler
         foreach(RaycastResult raycastResult in raycastResults) {
             CardDraggableSocket socket = raycastResult.gameObject.GetComponent<CardDraggableSocket>();
             if(socket != null && socket.Insertable) {
-                ProcessSocketEntered(socket, raycastResult.screenPosition);
+                ProcessSocketEntered(socket);
                 return;
             }
         }
@@ -234,7 +236,7 @@ public class CardUIController : Draggable, IPointerClickHandler
         Grow();
     }
 
-    private void ProcessSocketEntered(CardDraggableSocket socket, Vector2 screenPosition) {
+    private void ProcessSocketEntered(CardDraggableSocket socket) {
 
         if(socket == currentSocket) {
             return;
@@ -262,6 +264,22 @@ public class CardUIController : Draggable, IPointerClickHandler
         foreach(CardDraggableSocket socket in FindObjectsByType<CardDraggableSocket>(FindObjectsSortMode.None)) {
             socket.Hide();
         }
+    }
+
+    public void TweenToPos(Vector3 pos, float easeTime) {
+        GetComponent<RectTransform>().DOAnchorPos(pos, duration: easeTime).SetEase(Ease.InOutCubic);
+    }
+
+    // Move to the front if hovering over the card
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        prevIndex = transform.GetSiblingIndex();
+        transform.SetAsLastSibling();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        transform.SetSiblingIndex(prevIndex);
     }
 
     #endregion

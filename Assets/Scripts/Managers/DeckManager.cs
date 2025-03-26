@@ -9,7 +9,9 @@ public class DeckManager : Singleton<DeckManager>
     [SerializeField]
     private List<CardSO> cards;
 
-    public Action<Card> OnCardDealt { get; set; }
+    public EventProcessor<Card> OnCardDealt { get; set; } = new EventProcessor<Card>();
+
+    public EventProcessor<Card> OnCardDiscarded { get; set; } = new EventProcessor<Card>();
 
     public Action OnDeckReshuffle { get; set; }
 
@@ -48,7 +50,7 @@ public class DeckManager : Singleton<DeckManager>
         Card dealtAbility = CurrentDeck.Dequeue();
 
         CurrentHand.Add(dealtAbility);
-        OnCardDealt?.Invoke(dealtAbility);
+        OnCardDealt.Process(dealtAbility);
     }
 
     [ProButton]
@@ -67,6 +69,8 @@ public class DeckManager : Singleton<DeckManager>
     {
         Graveyard.Add(card);
         CurrentHand.Remove(card);
+
+        OnCardDiscarded.Process(card);
     }
 
     public void DiscardDown()
