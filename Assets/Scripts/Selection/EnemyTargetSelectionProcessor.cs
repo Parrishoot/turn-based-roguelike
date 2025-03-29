@@ -43,11 +43,23 @@ public abstract class EnemyTargetSelectionProcessor : SelectionProcessor
                 continue;
             }
 
-            ApplyToSelectedSpace(space);
             affectedSpaces.Add(space);
         }
 
-        OnSelectionProcessed?.Invoke(affectedSpaces);
+        if(affectedSpaces.Count == 0) {
+            OnSelectionProcessed?.Invoke(affectedSpaces);
+            return;
+        }
+
+        characterManager.Animator.OnAnimationFinished.OnNext(() => OnSelectionProcessed?.Invoke(affectedSpaces));
+        characterManager.Animator.AnimateAttack(
+            target: affectedSpaces.First().Occupant,
+            onAttack: () => {
+                foreach(BoardSpace space in affectedSpaces) {
+                    ApplyToSelectedSpace(space);
+                }
+            }
+        );
     }
 
     protected abstract void ApplyToSelectedSpace(BoardSpace space);

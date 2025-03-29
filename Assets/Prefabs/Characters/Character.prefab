@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8896325981328332564}
+  - component: {fileID: 8954200809167842488}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   - {fileID: 5394415224653076111}
   m_Father: {fileID: 8545387793827198001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8954200809167842488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4064461678344993810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ada16e6d39abd84f8b5a535d37b5830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatedTransformOverride: {fileID: 0}
 --- !u!1 &5783838896988898380
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,7 +59,6 @@ GameObject:
   - component: {fileID: 6940646993716593507}
   - component: {fileID: 1875533667796253262}
   - component: {fileID: 1102069290117108287}
-  - component: {fileID: 5371527612696401235}
   - component: {fileID: 6815639569024184735}
   m_Layer: 0
   m_Name: Character
@@ -123,19 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterManager: {fileID: 0}
---- !u!114 &5371527612696401235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5783838896988898380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed220dc23898ac84996f5b8ee959889e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthController: {fileID: 6940646993716593507}
 --- !u!114 &6815639569024184735
 MonoBehaviour:
   m_ObjectHideFlags: 0

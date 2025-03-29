@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MovementController>k__BackingField: {fileID: 0}
+  <HealthController>k__BackingField: {fileID: 0}
+  <Animator>k__BackingField: {fileID: 2095983136460785977}
 --- !u!1 &8790040830818003814
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,6 +60,7 @@ GameObject:
   - component: {fileID: 7358107763752508088}
   - component: {fileID: 4601248453305762940}
   - component: {fileID: 8217511148228048122}
+  - component: {fileID: 2095983136460785977}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -154,3 +157,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2095983136460785977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8790040830818003814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ada16e6d39abd84f8b5a535d37b5830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatedTransformOverride: {fileID: 0}
+  boardOccupant: {fileID: 0}

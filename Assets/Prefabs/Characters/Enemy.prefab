@@ -106,6 +106,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7e08d7cd5af00e4781eb44ddfc5c0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1547177661845230175 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8954200809167842488, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
+  m_PrefabInstance: {fileID: 7582684991050661607}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ada16e6d39abd84f8b5a535d37b5830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4143110473302080171 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5783838896988898380, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
@@ -125,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MovementController>k__BackingField: {fileID: 6318952042888598863}
   <HealthController>k__BackingField: {fileID: 678137514499702148}
+  <Animator>k__BackingField: {fileID: 1547177661845230175}
   <ProfileManager>k__BackingField: {fileID: 8303547255135487145}
   <StatusEffectManager>k__BackingField: {fileID: 7381485539289902296}
   <AbilityManager>k__BackingField: {fileID: 2185421600557934873}

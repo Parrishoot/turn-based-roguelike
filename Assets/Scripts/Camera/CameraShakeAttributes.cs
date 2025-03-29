@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class CameraShakeAttributes
 {
-    public float Magnitude { get; private set; } = .5f;
+    public float Magnitude { get; private set; } = .3f;
 
-    public float Duration { get; private set; } = .3f;
+    public float Duration { get; private set; } = .2f;
 
     public int Vibrato { get; private set; } = 70;
 

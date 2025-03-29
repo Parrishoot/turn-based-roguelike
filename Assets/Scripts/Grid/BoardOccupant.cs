@@ -28,6 +28,12 @@ public abstract class BoardOccupant: MonoBehaviour
     [field:SerializeReference]
     public MovementController MovementController { get; private set; }
 
+    [field:SerializeReference]
+    public HealthController HealthController { get; private set; }
+
+    [field:SerializeReference]
+    public OccupantAnimator Animator { get; private set; }
+
     public EventProcessor OnSpaceHoverStart = new EventProcessor();
 
     public EventProcessor OnSpaceHoverEnd = new EventProcessor();
@@ -38,19 +44,26 @@ public abstract class BoardOccupant: MonoBehaviour
 
     public bool IsMoveable => MovementController != null;
 
+    public bool IsDamageable => MovementController != null;
+
     public abstract CharacterType GetCharacterType();
 
     public abstract ISet<StatusEffectType> Immunities { get; }
 
     public virtual TurnType? CharacterTurnType => GetCharacterType().GetDefaultTurnType();
 
-    // Returns the amount of actual damage dealt
-    public virtual int Damage(int damage, bool shieldable=false) {
-        return 0;
+    public int Damage(int damage, bool shieldable=false)
+    {
+        if(!IsDamageable) {
+            return 0;
+        }
+
+        return HealthController.TakeDamage(damage, shieldable);
     }
 
-    public virtual void Heal(int healAmount) {
-        
+    public void Heal(int healAmount)
+    {
+        HealthController?.Heal(healAmount);
     }
 
     public virtual void ApplyStatus(StatusEffectType effectType) {
@@ -78,6 +91,10 @@ public abstract class BoardOccupant: MonoBehaviour
     {
         if(!CharacterTurnType.HasValue) {
             return;
+        }
+
+        if(IsDamageable) {
+            HealthController.OnDamageTaken += (x) => Animator.AnimateDamaged();
         }
 
         TurnMasterManager.Instance.OnTurnStarted.OnEvery(CheckForTurnBeginning);
