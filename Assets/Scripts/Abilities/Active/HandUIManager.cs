@@ -35,7 +35,13 @@ public class HandUIManager : MonoBehaviour
 
     private void DiscardCard(Card card)
     {
-        handCards.RemoveAll(x => x.Card == card);
+        CardUIController cardUIController = handCards.Find(x => x.Card == card);
+        
+        if(cardUIController != null) {
+            handCards.Remove(cardUIController);
+            Destroy(cardUIController.gameObject);
+        }
+        
         resetPositions = true;
     }
 

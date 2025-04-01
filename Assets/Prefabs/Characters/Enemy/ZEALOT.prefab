@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2185421600557934873, guid: f444be73254ad0c44923cafb64454106, type: 3}
+      propertyPath: abilities.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185421600557934873, guid: f444be73254ad0c44923cafb64454106, type: 3}
+      propertyPath: 'abilities.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 17dc97c1b967aec459a895f8746e5a94, type: 2}
     - target: {fileID: 2282281846605990614, guid: f444be73254ad0c44923cafb64454106, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -50,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4143110473302080171, guid: f444be73254ad0c44923cafb64454106, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: ZEALOT
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

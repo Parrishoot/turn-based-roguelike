@@ -15,22 +15,24 @@ public class DeckManager : Singleton<DeckManager>
 
     public Action OnDeckReshuffle { get; set; }
 
-    public Queue<Card> CurrentDeck { get; private set; } 
+    public Queue<Card> CurrentDeck { get; private set; } = new Queue<Card>();
 
-    public List<Card> Graveyard { get; private set; }
+    public List<Card> Graveyard { get; private set; } = new List<Card>();
 
-    public List<Card> CurrentHand { get; private set; }
+    public List<Card> CurrentHand { get; private set; } = new List<Card>();
 
     private AdjustableStat handLimit;
 
     void Start()
     {
         handLimit = PlayerManager.Instance.StatsManager.Stats[PlayerStatType.HAND_SIZE];
-        InitDeck();
+        RoundManager.Instance.OnRoundStarted.OnEvery(InitDeck);
     }
 
     private void InitDeck()
-    {
+    {   
+        ResetHand();
+
         Graveyard = new List<Card>();
         CurrentDeck = new Queue<Card>(cards.Select(x => x.GetCard()).ToList().Shuffled());
         CurrentHand = new List<Card>();
@@ -41,7 +43,7 @@ public class DeckManager : Singleton<DeckManager>
     }
 
     [ProButton]
-    private void DrawCard()
+    public void DrawCard()
     {
         if(CurrentHand.Count >= handLimit.CurrentValue || CurrentDeck.Count <= 0) {
             return;
@@ -76,6 +78,12 @@ public class DeckManager : Singleton<DeckManager>
     public void DiscardDown()
     {
         while(CurrentHand.Count > handLimit.CurrentValue) {
+            DiscardAbility(CurrentHand.Last());
+        }
+    }
+
+    public void ResetHand() {
+        while(CurrentHand.Count > 0) {
             DiscardAbility(CurrentHand.Last());
         }
     }

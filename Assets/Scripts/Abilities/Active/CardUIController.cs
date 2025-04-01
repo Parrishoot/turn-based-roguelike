@@ -131,7 +131,6 @@ public class CardUIController : Draggable, IPointerClickHandler, IPointerEnterHa
     public void DiscardCard()
     {
         DeckManager.Instance.DiscardAbility(Card);
-        Destroy(gameObject);
     }
 
     private bool PassiveActive() {

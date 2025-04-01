@@ -11,4 +11,14 @@ public class PlayerCharacterManager : CharacterManager
     {
         return new PlayerSelectionController();
     }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        if(Class != PlayerClass.TOTEM) {
+            RoundManager.Instance.OnRoundWon.OnNext(Events.Death.Process);
+            RoundManager.Instance.OnRoundLost.OnNext(Events.Death.Process);
+        }
+    }
 }

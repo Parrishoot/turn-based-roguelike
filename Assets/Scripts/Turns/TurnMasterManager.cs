@@ -16,19 +16,12 @@ public class TurnMasterManager: Singleton<TurnMasterManager>
     private TurnManager currentTurnManager;
 
     private void Start() {
-
-        turnQueue = new LoopingQueue<TurnManager>(turnManagers);
-
         foreach(TurnManager turnManager in turnManagers) {
-            turnManager.OnTurnFinished.OnEvery(TransitionToNextTurn);
+            turnManager.OnTurnFinished.OnEvery(() => OnTurnEnded.Process(turnManager.GetTurnType()));
         } 
     }
 
-    private void TransitionToNextTurn() {
-
-        if(currentTurnManager != null) {
-            OnTurnEnded.Process(currentTurnManager.GetTurnType());
-        }   
+    public void TransitionToNextTurn() {
 
         currentTurnManager = turnQueue.GetNext();
 
@@ -38,6 +31,7 @@ public class TurnMasterManager: Singleton<TurnMasterManager>
 
     [ProButton]
     public void Begin() {
+        turnQueue = new LoopingQueue<TurnManager>(turnManagers);
         TransitionToNextTurn();
     }
 }

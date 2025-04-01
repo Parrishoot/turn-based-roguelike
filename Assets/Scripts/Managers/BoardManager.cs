@@ -93,4 +93,11 @@ public class BoardManager : Singleton<BoardManager>
 
         return matchingSpaces;
     }
+
+    public BoardSpace RandomSpace() {
+        int xCoord = UnityEngine.Random.Range(0, Grid.GridBounds.x - 1);
+        int yCoord = UnityEngine.Random.Range(0, Grid.GridBounds.y - 1);
+
+        return Board[xCoord, yCoord];
+    }
 }

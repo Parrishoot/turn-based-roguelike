@@ -9,9 +9,7 @@ public class EnemyTurnManager : TurnManager
     public override void StartTurn()
     {
         // TODO: Actual logic
-        NPCCharacterManager enemyNPC = FindObjectsByType<NPCCharacterManager>(FindObjectsSortMode.None)
-            .Where(x => x.GetCharacterType() == CharacterType.ENEMY)
-            .ToList()
+        NPCCharacterManager enemyNPC = SpawnManager.Instance.EnemyCharacters
             .Shuffled()
             .First();
 
