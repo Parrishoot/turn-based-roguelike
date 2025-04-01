@@ -44,8 +44,6 @@ public class CardUIController : Draggable, IPointerClickHandler, IPointerEnterHa
         Card = card;
         titleText.text = card.CardName;
         descriptionText.text = card.Active.GetAbilityDescription();
-
-        BeginAnimation();
     }
     
     void Update()

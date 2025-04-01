@@ -20,8 +20,11 @@ public abstract class BoardOccupant: MonoBehaviour
             }
 
             space = value;
-            space.Selectable.OnHoverStart += HoverStart;
-            space.Selectable.OnHoverEnd += HoverEnd;
+
+            if(space != null) {
+                space.Selectable.OnHoverStart += HoverStart;
+                space.Selectable.OnHoverEnd += HoverEnd;
+            }
         }
     }
 
@@ -79,11 +82,11 @@ public abstract class BoardOccupant: MonoBehaviour
         MovementController.MoveAlongPath(path);
     }
 
-    private void HoverStart () {
+    public void HoverStart () {
         OnSpaceHoverStart.Process();
     }
 
-    private void HoverEnd () {
+    public void HoverEnd () {
         OnSpaceHoverEnd.Process();
     }
 

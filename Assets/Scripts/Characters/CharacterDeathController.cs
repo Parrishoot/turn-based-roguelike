@@ -14,6 +14,7 @@ public class CharacterDeathController : MonoBehaviour
     private void ProcessDeath()
     {
         // TODO: Implement real death handling
+        characterManager.Space = null;
         Destroy(gameObject);
     }
 }

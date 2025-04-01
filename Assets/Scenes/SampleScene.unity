@@ -913,7 +913,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 0}
+  m_BackGroundColor: {r: 0.40032038, g: 0.45266113, b: 0.49056602, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1305,6 +1305,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6673948124210163412, guid: f444be73254ad0c44923cafb64454106, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6673948124210163412, guid: f444be73254ad0c44923cafb64454106, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 61da846623706dc44ad354b4ca7e4ab3, type: 2}
     - target: {fileID: 7917312762036194362, guid: f444be73254ad0c44923cafb64454106, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1905,9 +1913,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 1153041809}
     m_Modifications:
     - target: {fileID: 930996738660368467, guid: 2a3b7bdc49decea4aa6c16b9b2642d8e, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 930996738660368467, guid: 2a3b7bdc49decea4aa6c16b9b2642d8e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: e4d479df297da7b42b8e20cdf2f68215, type: 2}
+    - target: {fileID: 930996738660368467, guid: 2a3b7bdc49decea4aa6c16b9b2642d8e, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 106f3ff43a17d4967a2b64c7a92e49ec, type: 2}
     - target: {fileID: 6771443348783216570, guid: 2a3b7bdc49decea4aa6c16b9b2642d8e, type: 3}
       propertyPath: m_Name
       value: TotemCharacter

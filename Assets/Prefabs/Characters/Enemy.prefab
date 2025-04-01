@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: characterManager
       value: 
       objectReference: {fileID: 2988960201523775955}
+    - target: {fileID: 8440790105842845032, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
+      propertyPath: characterManager
+      value: 
+      objectReference: {fileID: 2988960201523775955}
     - target: {fileID: 8545387793827198001, guid: 65c6262005caefd449f4e63880244ab1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

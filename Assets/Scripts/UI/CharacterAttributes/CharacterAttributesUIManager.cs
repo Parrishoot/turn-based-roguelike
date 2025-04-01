@@ -38,6 +38,9 @@ public class CharacterAttributeUIManager : MonoBehaviour, IPointerEnterHandler, 
             Destroy(gameObject);
         });
 
+        CharacterManager.OnSpaceHoverStart.OnEvery(Show);
+        CharacterManager.OnSpaceHoverEnd.OnEvery(Hide);
+
         characterNameText.text = characterManager.ProfileManager.Profile.CharacterName;
         healthbarUIController.Init(characterManager);
 
@@ -100,13 +103,21 @@ public class CharacterAttributeUIManager : MonoBehaviour, IPointerEnterHandler, 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        CharacterManager.HoverStart();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        CharacterManager.HoverEnd();
+    }
+
+    private void Show() {
         foreach(CharacterAttributesUIController controller in attributeControllers) {
             controller.Show();
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
+    private void Hide() {
         foreach(CharacterAttributesUIController controller in attributeControllers) {
             controller.Hide();
         }

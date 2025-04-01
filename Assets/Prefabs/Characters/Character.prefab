@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8896325981328332564}
   - component: {fileID: 8954200809167842488}
+  - component: {fileID: 4685800001382695996}
+  - component: {fileID: 8440790105842845032}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -46,6 +48,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatedTransformOverride: {fileID: 0}
+--- !u!114 &4685800001382695996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4064461678344993810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &8440790105842845032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4064461678344993810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e89cabcca3b7498408b2d8186f9ff989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outline: {fileID: 4685800001382695996}
+  characterManager: {fileID: 0}
 --- !u!1 &5783838896988898380
 GameObject:
   m_ObjectHideFlags: 0
