@@ -29,6 +29,11 @@ public class Card
             return characterClass != PlayerClass.TOTEM;
         }
 
+        // Only allow all or one character class
+        if(CharacterClasses.Count > 1) {
+            return true;
+        }
+
         return CharacterClasses.Contains(characterClass);
     }
 }
