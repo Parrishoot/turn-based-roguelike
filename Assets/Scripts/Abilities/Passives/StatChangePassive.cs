@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class StatChangePassive<T> : PassiveAbility
@@ -12,12 +13,12 @@ where T: System.Enum
     [field:SerializeReference]
     public int Amount { get; private set; }
 
-    public override PassiveController GetController()
+    public override PassiveController GetController(List<PlayerClass> applicableClasses)
     {
-        return GetStatPassiveController();
+        return GetStatPassiveController(applicableClasses);
     }
 
-    protected abstract StatChangePassiveController<T> GetStatPassiveController();
+    protected abstract StatChangePassiveController<T> GetStatPassiveController(List<PlayerClass> applicableClasses);
 
     public override string GetAbilityDescription()
     {

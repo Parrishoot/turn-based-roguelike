@@ -5,24 +5,30 @@ using UnityEngine;
 public class CharacterStatChangePassiveController : StatChangePassiveController<CharacterStatType>
 {
     
-    private IEventHandler<CharacterManager> characterSpawnedHandler;
+    private IEventHandler<PlayerCharacterManager> characterSpawnedHandler;
+    private List<PlayerClass> applicableClasses;
 
-    public CharacterStatChangePassiveController(CharacterStatType statType, ValueAdjuster statAdjuster): base(statType, statAdjuster)
+    public CharacterStatChangePassiveController(CharacterStatType statType, ValueAdjuster statAdjuster, List<PlayerClass> applicableClasses) : base(statType, statAdjuster)
     {
-
+        this.applicableClasses = applicableClasses;
     }
 
     protected override void ProcessDeactivation()
     {
-        SpawnManager.Instance.CharacterSpawned.UnsubscribeHandler(characterSpawnedHandler);
+        SpawnManager.Instance.PlayerCharacterSpawned.UnsubscribeHandler(characterSpawnedHandler);
         
         base.ProcessDeactivation();
     }
 
     protected override void ProcessActivation()
     {
-        characterSpawnedHandler = new EveryEventHandler<CharacterManager>((manager) => manager.ProfileManager.Stats[statType].Modifier.AddAdjuster(statAdjuster));
-        SpawnManager.Instance.CharacterSpawned.SubscribeHandler(characterSpawnedHandler);
+        characterSpawnedHandler = new EveryEventHandler<PlayerCharacterManager>((manager) => {
+            if (applicableClasses.Contains(manager.Class)) {
+                manager.ProfileManager.Stats[statType].Modifier.AddAdjuster(statAdjuster);  
+            }
+        });
+
+        SpawnManager.Instance.PlayerCharacterSpawned.SubscribeHandler(characterSpawnedHandler);
 
         base.ProcessActivation();
     }
@@ -31,10 +37,10 @@ public class CharacterStatChangePassiveController : StatChangePassiveController<
     {
         List<StatsManager<CharacterStatType>> statsManagers = new List<StatsManager<CharacterStatType>>();
 
-         // TODO: Migrate this to a manager
-        List<CharacterProfileManager> characters = GameObject.FindObjectsByType<CharacterManager>(FindObjectsSortMode.None)
+        
+        List<CharacterProfileManager> characters = SpawnManager.Instance.PlayerCharacters
             .ToList()
-            .Where(c => c.GetCharacterType() == CharacterType.PLAYER)
+            .Where(c => applicableClasses.Contains(c.Class))
             .Select(c => c.ProfileManager)
             .ToList();
 

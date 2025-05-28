@@ -12,30 +12,14 @@ public class StatusEffectPassive : PassiveAbility
     [SerializeField]
     private List<PlayerClass> classes = new List<PlayerClass>();
 
-    protected List<PlayerClass> ApplicableClasses {
-        get {
-            if(classes.Count == 0) {
-                List<PlayerClass> applicableClasses = Enum.GetValues(typeof(PlayerClass)).Cast<PlayerClass>().ToList();
-                applicableClasses.Remove(PlayerClass.TOTEM);
-
-                return applicableClasses;
-            }
-
-            return classes;
-        }
-    }
-
     public override string GetAbilityDescription()
     {
-        return string.Format("{0} gains {1}", string.Join(",", ApplicableClasses), string.Join(",", effects));
+        return string.Format("Gain {0}", string.Join(",", effects));
     }
 
-    public override PassiveController GetController()
+    public override PassiveController GetController(List<PlayerClass> applicableClasses)
     {
-        return new StatusEffectPassiveController(effects, Filter);
-    }
-
-    private bool Filter(PlayerCharacterManager characterManager) { 
-        return ApplicableClasses.Contains(characterManager.Class);
+        Predicate<PlayerCharacterManager> filter = (x) => applicableClasses.Contains(x.Class);
+        return new StatusEffectPassiveController(effects, filter);
     }
 }

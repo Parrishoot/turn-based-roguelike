@@ -142,7 +142,7 @@ public class CardUIController : Draggable, IPointerClickHandler, IPointerEnterHa
 
         if(!PassiveActive()) {
             ManaGer.Instance.SpendMana(Card.BaseCost);
-            passive = Card.Passive.GetController();
+            passive = Card.Passive.GetController(Card.ApplicableClasses);
             passive.Activate();
             cardAnimationController.Shrink();
         }
@@ -303,8 +303,8 @@ public class CardUIController : Draggable, IPointerClickHandler, IPointerEnterHa
 
         Color color = allClass;
 
-        if(Card.CharacterClasses.Count == 1) {
-            PlayerClass playerClass = Card.CharacterClasses.First();
+        if(Card.ApplicableClasses.Count == 1) {
+            PlayerClass playerClass = Card.ApplicableClasses.First();
             color = playerClass switch {
                 PlayerClass.MAGE => mageColor,
                 PlayerClass.ROGUE => rogueColor,

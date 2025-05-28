@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class Card
         BaseCost = baseCost;
         Active = active;
         Passive = passive;
-        CharacterClasses = characterClasses;
+        this.characterClasses = characterClasses;
     }
 
     public string CardName { get; private set; }
@@ -21,35 +22,41 @@ public class Card
 
     public PassiveAbility Passive { get; private set; }
 
-    public List<PlayerClass> CharacterClasses { get; private set; }
+    private List<PlayerClass> characterClasses = new List<PlayerClass>();
+
+    public List<PlayerClass> ApplicableClasses
+    {
+        get
+        {
+            if (characterClasses.Count != 0)
+            {
+                return characterClasses;
+            }
+
+            List<PlayerClass> classes = Enum.GetValues(typeof(PlayerClass)).Cast<PlayerClass>().ToList();
+            classes.Remove(PlayerClass.TOTEM);
+
+            return classes;
+        }
+        private set
+        {
+            characterClasses = value;
+        }
+    }
 
     public bool CanPlayOnCharacter(PlayerClass characterClass)
     {
-
-        // If none are supplied - assume all but Totem are allowed
-        if (CharacterClasses.Count == 0)
-        {
-            return characterClass != PlayerClass.TOTEM;
-        }
-
-        // Only allow all or one character class
-        if (CharacterClasses.Count > 1)
-        {
-            return true;
-        }
-
-        return CharacterClasses.Contains(characterClass);
+        return ApplicableClasses.Contains(characterClass);
     }
 
     public PlayerClass? GetSpawnPlayerClass()
     {
-        if (CharacterClasses.Count == 0 ||
-            CharacterClasses.Count > 1 || 
-            CharacterClasses.Contains(PlayerClass.TOTEM))
+        if (ApplicableClasses.Count > 1 || 
+            ApplicableClasses.Contains(PlayerClass.TOTEM))
         {
             return null;
         }
 
-        return CharacterClasses.First();
+        return ApplicableClasses.First();
     }
 }
