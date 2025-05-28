@@ -61,6 +61,8 @@ public class SpawnManager : Singleton<SpawnManager>
                 PlayerCharacters.Remove(playerCharacterManager);
             });
 
+            CharacterPanelManager.Instance.AddCharacterAttributePanel(playerCharacterManager);
+
             PlayerCharacterSpawned.Process(playerCharacterManager);
             CharacterSpawned.Process(playerCharacterManager);
         });
@@ -82,6 +84,9 @@ public class SpawnManager : Singleton<SpawnManager>
                 EnemyCharacters.Remove(enemyCharacterManager);
             });
             
+            
+            CharacterPanelManager.Instance.AddCharacterAttributePanel(enemyCharacterManager);
+
             EnemyCharacterSpawned.Process(enemyCharacterManager);
             CharacterSpawned.Process(enemyCharacterManager);
         });

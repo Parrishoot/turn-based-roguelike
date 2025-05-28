@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -12,7 +11,6 @@ public class CardUIController : Draggable, IPointerClickHandler, IPointerEnterHa
 {
     private const float IDLE_ROTATE_AMOUNT = 2f; 
     private const float IDLE_ANIMATION_TIME = 2f;
-    private const float ROTATE_TIME = .25f; 
 
     [Header("Text")]
     [SerializeField]
@@ -28,15 +26,10 @@ public class CardUIController : Draggable, IPointerClickHandler, IPointerEnterHa
     [SerializeField]
     private RectTransform cardPanelTransform;
 
-    [SerializeField]
-    private RectTransform cardBaseTransform;
 
     [Header("Material")]
     [SerializeField]
     private Image cardHeader;
-
-    [SerializeField]
-    private Image cardFooter;
 
     [SerializeField]
     private Color mageColor = Color.blue;
@@ -56,11 +49,13 @@ public class CardUIController : Draggable, IPointerClickHandler, IPointerEnterHa
     [SerializeField]
     private Color passiveTextColor = Color.black;
 
+    [Header("Animation")]
+    [SerializeField]
+    private CardAnimationController cardAnimationController;
+
     public Card Card { get; private set; }
 
     private PassiveController passive = null;
-
-    private Tween activeFlipAnimation = null;
 
     private Tween idleSequence = null;
 
@@ -72,8 +67,6 @@ public class CardUIController : Draggable, IPointerClickHandler, IPointerEnterHa
 
     private Material cardHeaderMat;
 
-    private Material cardFooterMat;
-
     public void Setup(Card card)
     {
         Card = card;
@@ -82,9 +75,6 @@ public class CardUIController : Draggable, IPointerClickHandler, IPointerEnterHa
 
         cardHeaderMat = Instantiate(cardHeader.material);
         cardHeader.material = cardHeaderMat;
-        
-        cardFooterMat = Instantiate(cardFooter.material);
-        cardFooter.material = cardFooterMat;
 
         SetCardColor();
     }
@@ -110,28 +100,17 @@ public class CardUIController : Draggable, IPointerClickHandler, IPointerEnterHa
 
     public void Flip() {
 
-        if(activeFlipAnimation != null || PassiveActive()) {
+        if(cardAnimationController.AnimationInProgress || PassiveActive()) {
             return;
         }
 
-        
-        frontShowing = !frontShowing;
-
-        activeFlipAnimation = DOTween.Sequence()
-            .Append(cardBaseTransform.DOLocalRotate(Vector3.up * 90, ROTATE_TIME / 2).SetEase(Ease.InCubic).OnComplete(UpdateFlippingCard))
-            .Append(cardBaseTransform.DOLocalRotate(Vector3.zero, ROTATE_TIME / 2).SetEase(Ease.OutCubic))
-            .Play()
-            .OnComplete(() => {
-                activeFlipAnimation = null;
-            });
-
+        cardAnimationController.Flip(UpdateFlippingCard);
     }
 
     private void UpdateFlippingCard() {
-        cardBaseTransform.localEulerAngles = Vector3.up * -90f;
+        frontShowing = !frontShowing;
         descriptionText.text = frontShowing ? Card.Active.GetAbilityDescription() : Card.Passive.GetAbilityDescription();
         descriptionText.color = frontShowing ? activeTextColor : passiveTextColor;
-        cardFooterMat.SetInt("_Passive", frontShowing ? 0 : 1);
     }
 
     public void Use() {
@@ -165,7 +144,7 @@ public class CardUIController : Draggable, IPointerClickHandler, IPointerEnterHa
             ManaGer.Instance.SpendMana(Card.BaseCost);
             passive = Card.Passive.GetController();
             passive.Activate();
-            Shrink();
+            cardAnimationController.Shrink();
         }
         else {
             passive.Deactivate();
@@ -202,14 +181,6 @@ public class CardUIController : Draggable, IPointerClickHandler, IPointerEnterHa
         else if(eventData.button == PointerEventData.InputButton.Right) {
             Flip();
         }
-    }
-
-    public void Shrink() {
-        cardPanelTransform.DOScale(Vector3.one * .8f, ROTATE_TIME / 2).SetEase(Ease.InOutCubic);
-    }
-
-    public void Grow() {
-        cardPanelTransform.DOScale(Vector3.one, ROTATE_TIME / 2).SetEase(Ease.InOutCubic);
     }
 
     #endregion
@@ -275,7 +246,7 @@ public class CardUIController : Draggable, IPointerClickHandler, IPointerEnterHa
 
     private void ProcessSocketExited() {
         currentSocket = null;
-        Grow();
+        cardAnimationController.Grow();
     }
 
     private void ProcessSocketEntered(CardDraggableSocket socket) {
@@ -285,7 +256,7 @@ public class CardUIController : Draggable, IPointerClickHandler, IPointerEnterHa
         }
 
         currentSocket = socket;
-        Shrink();
+        cardAnimationController.Shrink();
     }
 
     private void OnDisable()

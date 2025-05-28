@@ -30,6 +30,6 @@ public class CharacterPanelManager : Singleton<CharacterPanelManager>
     }
 
     public CharacterAttributeUIManager GetAttributePanelForCharacter(CharacterManager characterManager) {
-        return characterAttributePanels.Where(x => x.CharacterManager == characterManager).First();
+        return characterAttributePanels.Where(x => x.CharacterManager == characterManager).FirstOrDefault();
     }
 }

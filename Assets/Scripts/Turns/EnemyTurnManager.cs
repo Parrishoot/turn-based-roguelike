@@ -8,6 +8,11 @@ public class EnemyTurnManager : TurnManager
 
     public override void StartTurn()
     {
+        if(SpawnManager.Instance.EnemyCharacters.Count == 0) {
+            EndTurn();
+            return;
+        }
+
         // TODO: Actual logic
         NPCCharacterManager enemyNPC = SpawnManager.Instance.EnemyCharacters
             .Shuffled()

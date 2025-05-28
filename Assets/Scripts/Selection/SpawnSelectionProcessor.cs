@@ -3,10 +3,18 @@ using UnityEngine;
 
 public class SpawnSelectionProcessor : SelectionProcessor
 {
+    private PlayerClass playerClass;
+
+    public SpawnSelectionProcessor(PlayerClass playerClass)
+    {
+        this.playerClass = playerClass;
+    }
+
     public override SelectionCriteria GetCriteria()
     {
         return new SelectionCriteria()
-            .WithFilter(space => {
+            .WithFilter(space =>
+            {
                 return !space.IsOccupied;
             });
     }
@@ -15,7 +23,7 @@ public class SpawnSelectionProcessor : SelectionProcessor
     {
         foreach (BoardSpace space in selectedSpaces) {
             // TODO: Set this to the right character class
-            SpawnManager.Instance.SpawnPlayerCharacter(PlayerClass.MAGE, space);
+            SpawnManager.Instance.SpawnPlayerCharacter(playerClass, space);
         }
     }
 }

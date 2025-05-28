@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: 8003898101846836525}
   - component: {fileID: 7947536914678699906}
   - component: {fileID: 4444459516813551252}
+  - component: {fileID: 8500316346560809390}
   m_Layer: 5
   m_Name: Mana Cost
   m_TagString: Untagged
@@ -406,7 +407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7947536914678699906
@@ -447,6 +448,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8500316346560809390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3072011141033812405}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.23529412}
+  m_EffectDistance: {x: 5, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &3652808867275052560
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,6 +711,7 @@ GameObject:
   - component: {fileID: 962669188473738029}
   - component: {fileID: 8186851251657964935}
   - component: {fileID: 111814449519995905}
+  - component: {fileID: 8602356320656699403}
   m_Layer: 5
   m_Name: Footer
   m_TagString: Untagged
@@ -719,7 +736,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -40}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8186851251657964935
@@ -760,6 +777,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8602356320656699403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4454474843674145424}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.23529412}
+  m_EffectDistance: {x: 5, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &4953320025157421793
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,7 +1098,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 128.57143}
+  m_AnchoredPosition: {x: 0, y: 140.71428}
   m_SizeDelta: {x: 120, y: 20}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &9133950646125858746
@@ -1312,6 +1344,7 @@ GameObject:
   - component: {fileID: 4014033444263507860}
   - component: {fileID: 4108801372916706498}
   - component: {fileID: 6034489624278629931}
+  - component: {fileID: 762487159516982897}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -1377,6 +1410,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &762487159516982897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7898719571424370956}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.23529412}
+  m_EffectDistance: {x: 5, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8200084789536576164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,7 +1484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.011764706}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.007843138}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1464,6 +1512,7 @@ GameObject:
   - component: {fileID: 8981176631428739473}
   - component: {fileID: 6156921816474115181}
   - component: {fileID: 5098609118390430333}
+  - component: {fileID: 2760677514108215454}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -1518,12 +1567,26 @@ MonoBehaviour:
   descriptionText: {fileID: 7173428835163120368}
   manaText: {fileID: 8436503954375055200}
   cardPanelTransform: {fileID: 6783008011412155144}
-  cardBaseTransform: {fileID: 962669188473738029}
   cardHeader: {fileID: 6034489624278629931}
-  cardFooter: {fileID: 111814449519995905}
   mageColor: {r: 0, g: 0, b: 0.6037736, a: 1}
   rogueColor: {r: 0.509434, g: 0.016820943, b: 0.016820943, a: 1}
   tankColor: {r: 0, g: 0.4056604, b: 0, a: 1}
   allClass: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   activeTextColor: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
   passiveTextColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+  cardAnimationController: {fileID: 2760677514108215454}
+--- !u!114 &2760677514108215454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8381091094645367693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a341e98d1bd70004a8905cc5270b3d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPanelTransform: {fileID: 6783008011412155144}
+  cardHeaderTransform: {fileID: 4014033444263507860}
+  cardBaseTransform: {fileID: 962669188473738029}

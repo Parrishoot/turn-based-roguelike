@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Card
@@ -12,28 +13,43 @@ public class Card
         CharacterClasses = characterClasses;
     }
 
-    public string CardName { get ; private set;}
+    public string CardName { get; private set; }
 
     public int BaseCost { get; private set; } = 4;
-    
+
     public ActiveAbility Active { get; private set; }
 
     public PassiveAbility Passive { get; private set; }
 
-    public List<PlayerClass> CharacterClasses{ get; private set; }
+    public List<PlayerClass> CharacterClasses { get; private set; }
 
-    public bool CanPlayOnCharacter(PlayerClass characterClass) {
+    public bool CanPlayOnCharacter(PlayerClass characterClass)
+    {
 
         // If none are supplied - assume all but Totem are allowed
-        if(CharacterClasses.Count == 0) {
+        if (CharacterClasses.Count == 0)
+        {
             return characterClass != PlayerClass.TOTEM;
         }
 
         // Only allow all or one character class
-        if(CharacterClasses.Count > 1) {
+        if (CharacterClasses.Count > 1)
+        {
             return true;
         }
 
         return CharacterClasses.Contains(characterClass);
+    }
+
+    public PlayerClass? GetSpawnPlayerClass()
+    {
+        if (CharacterClasses.Count == 0 ||
+            CharacterClasses.Count > 1 || 
+            CharacterClasses.Contains(PlayerClass.TOTEM))
+        {
+            return null;
+        }
+
+        return CharacterClasses.First();
     }
 }

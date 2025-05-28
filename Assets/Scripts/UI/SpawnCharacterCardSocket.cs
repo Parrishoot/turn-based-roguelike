@@ -8,7 +8,7 @@ public class SpawnCharacterCardSocket : CardDraggableSocket
 
     public override bool CanProcessCard(Card card)
     {
-        return ManaGer.Instance.ManaAvailable(baseCost);
+        return ManaGer.Instance.ManaAvailable(baseCost) && card.GetSpawnPlayerClass().HasValue;
     }
 
     public override void ProcessCardInserted(CardUIController card)
@@ -17,9 +17,15 @@ public class SpawnCharacterCardSocket : CardDraggableSocket
             return;
         }
 
-        // TODO: Spawn based on card type
+        PlayerClass? spawnClass = card.Card.GetSpawnPlayerClass();
+
+        if (!spawnClass.HasValue)
+        {
+            return;
+        }
+
         PlayerSelectionController playerSelectionController = new PlayerSelectionController();
-        playerSelectionController.BeginSelection(new SpawnSelectionProcessor());
+        playerSelectionController.BeginSelection(new SpawnSelectionProcessor(spawnClass.Value));
 
         card.DiscardCard();
         ManaGer.Instance.SpendMana(baseCost);
